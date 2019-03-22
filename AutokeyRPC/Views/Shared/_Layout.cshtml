@@ -31,6 +31,7 @@
                     @*<li>@Html.ActionLink("AutOK - Riparazione presso carrozzerie", "Index", "Home")</li>*@
                     @*<li>@Html.ActionLink("About", "About", "Home")</li>*@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+
                     @if (Request.IsAuthenticated)
                     {
                         <li>@Html.ActionLink(@Html.Encode(User.Identity.Name) + "panel", "RitornaPannelloUtente", "Home")</li>
