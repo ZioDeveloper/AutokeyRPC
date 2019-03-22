@@ -110,13 +110,22 @@
           <Property Name="IDCantiere" Type="int" Nullable="false" />
           <Property Name="Descr" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="RPC_FotoXTelaio">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDTelaio" Type="int" Nullable="false" />
+          <Property Name="NomeFile" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="InsertDate" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="RPC_Lotti">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descrizione" Type="nvarchar" MaxLength="50" />
           <Property Name="InsertDate" Type="datetime" Nullable="false" />
-          <Property Name="Note" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="RPC_Telai">
           <Key>
@@ -125,7 +134,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IDCantiere" Type="int" Nullable="false" />
           <Property Name="IDOperatore" Type="varchar" MaxLength="4" />
-          <Property Name="IDLotto" Type="int" Nullable="false" StoreGeneratedPattern="None" />
+          <Property Name="IDLotto" Type="int" Nullable="false" />
           <Property Name="Telaio" Type="nvarchar" MaxLength="50" />
           <Property Name="Descr" Type="nvarchar" MaxLength="50" />
           <Property Name="IsFinished" Type="bit" Nullable="false" />
@@ -190,15 +199,15 @@ warning 6002: The table/view 'Autokey.dbo.RPC_Cantieri_vw' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RPC_Telai_RPC_Cantieri">
-          <End Role="AUK_cantieri" Type="Self.AUK_cantieri" Multiplicity="1" />
-          <End Role="RPC_Telai" Type="Self.RPC_Telai" Multiplicity="*" />
+        <Association Name="FK_RPC_FotoXTelaio_RPC_Telai">
+          <End Role="RPC_Telai" Type="Self.RPC_Telai" Multiplicity="1" />
+          <End Role="RPC_FotoXTelaio" Type="Self.RPC_FotoXTelaio" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AUK_cantieri">
+            <Principal Role="RPC_Telai">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="RPC_Telai">
-              <PropertyRef Name="IDCantiere" />
+            <Dependent Role="RPC_FotoXTelaio">
+              <PropertyRef Name="IDTelaio" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -214,23 +223,12 @@ warning 6002: The table/view 'Autokey.dbo.RPC_Cantieri_vw' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RPC_Telai_RPC_Telai1">
-          <End Role="PKT_Operatori" Type="Self.PKT_Operatori" Multiplicity="0..1" />
-          <End Role="RPC_Telai" Type="Self.RPC_Telai" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PKT_Operatori">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="RPC_Telai">
-              <PropertyRef Name="IDOperatore" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="AutokeyModelStoreContainer">
           <EntitySet Name="AUK_cantieri" EntityType="Self.AUK_cantieri" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AUK_tecnici" EntityType="Self.AUK_tecnici" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PKT_Operatori" EntityType="Self.PKT_Operatori" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RPC_Cantieri" EntityType="Self.RPC_Cantieri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RPC_FotoXTelaio" EntityType="Self.RPC_FotoXTelaio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RPC_Lotti" EntityType="Self.RPC_Lotti" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RPC_Telai" EntityType="Self.RPC_Telai" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RPC_Cantieri_vw" EntityType="Self.RPC_Cantieri_vw" store:Type="Views" store:Schema="dbo">
@@ -256,16 +254,12 @@ warning 6002: The table/view 'Autokey.dbo.RPC_Cantieri_vw' does not have a prima
             <End Role="AUK_cantieri" EntitySet="AUK_cantieri" />
             <End Role="RPC_Cantieri" EntitySet="RPC_Cantieri" />
           </AssociationSet>
-          <AssociationSet Name="FK_RPC_Telai_RPC_Cantieri" Association="Self.FK_RPC_Telai_RPC_Cantieri">
-            <End Role="AUK_cantieri" EntitySet="AUK_cantieri" />
+          <AssociationSet Name="FK_RPC_FotoXTelaio_RPC_Telai" Association="Self.FK_RPC_FotoXTelaio_RPC_Telai">
             <End Role="RPC_Telai" EntitySet="RPC_Telai" />
+            <End Role="RPC_FotoXTelaio" EntitySet="RPC_FotoXTelaio" />
           </AssociationSet>
           <AssociationSet Name="FK_RPC_Telai_RPC_Lotti" Association="Self.FK_RPC_Telai_RPC_Lotti">
             <End Role="RPC_Lotti" EntitySet="RPC_Lotti" />
-            <End Role="RPC_Telai" EntitySet="RPC_Telai" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RPC_Telai_RPC_Telai1" Association="Self.FK_RPC_Telai_RPC_Telai1">
-            <End Role="PKT_Operatori" EntitySet="PKT_Operatori" />
             <End Role="RPC_Telai" EntitySet="RPC_Telai" />
           </AssociationSet>
         </EntityContainer>
@@ -321,6 +315,11 @@ warning 6002: The table/view 'Autokey.dbo.RPC_Cantieri_vw' does not have a prima
           <AssociationSet Name="FK_RPC_Telai_RPC_Telai11" Association="AutokeyModel.FK_RPC_Telai_RPC_Telai11">
             <End Role="PKT_Operatori" EntitySet="PKT_Operatori" />
             <End Role="RPC_Telai" EntitySet="RPC_Telai" />
+          </AssociationSet>
+          <EntitySet Name="RPC_FotoXTelaio" EntityType="AutokeyModel.RPC_FotoXTelaio" />
+          <AssociationSet Name="FK_RPC_FotoXTelaio_RPC_Telai" Association="AutokeyModel.FK_RPC_FotoXTelaio_RPC_Telai">
+            <End Role="RPC_Telai" EntitySet="RPC_Telai" />
+            <End Role="RPC_FotoXTelaio" EntitySet="RPC_FotoXTelaio" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AUK_cantieri">
@@ -470,8 +469,8 @@ warning 6002: The table/view 'Autokey.dbo.RPC_Cantieri_vw' does not have a prima
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="InsertDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Note" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="RPC_Telai" Relationship="AutokeyModel.FK_RPC_Telai_RPC_Lotti" FromRole="RPC_Lotti" ToRole="RPC_Telai" />
+          <Property Name="Descrizione" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="RPC_Telai">
           <Key>
@@ -490,6 +489,7 @@ warning 6002: The table/view 'Autokey.dbo.RPC_Cantieri_vw' does not have a prima
           <NavigationProperty Name="PKT_Operatori" Relationship="AutokeyModel.FK_RPC_Telai_RPC_Telai11" FromRole="RPC_Telai" ToRole="PKT_Operatori" />
           <Property Name="Telaio" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Descr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="RPC_FotoXTelaio" Relationship="AutokeyModel.FK_RPC_FotoXTelaio_RPC_Telai" FromRole="RPC_Telai" ToRole="RPC_FotoXTelaio" />
         </EntityType>
         <Association Name="FK_RPC_Telai_RPC_Cantieri">
           <End Type="AutokeyModel.AUK_cantieri" Role="AUK_cantieri" Multiplicity="1" />
@@ -558,6 +558,28 @@ warning 6002: The table/view 'Autokey.dbo.RPC_Cantieri_vw' does not have a prima
             </Principal>
             <Dependent Role="RPC_Telai">
               <PropertyRef Name="IDOperatore" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="RPC_FotoXTelaio">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDTelaio" Type="Int32" Nullable="false" />
+          <Property Name="NomeFile" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="InsertDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="RPC_Telai" Relationship="AutokeyModel.FK_RPC_FotoXTelaio_RPC_Telai" FromRole="RPC_FotoXTelaio" ToRole="RPC_Telai" />
+        </EntityType>
+        <Association Name="FK_RPC_FotoXTelaio_RPC_Telai">
+          <End Type="AutokeyModel.RPC_Telai" Role="RPC_Telai" Multiplicity="1" />
+          <End Type="AutokeyModel.RPC_FotoXTelaio" Role="RPC_FotoXTelaio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RPC_Telai">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RPC_FotoXTelaio">
+              <PropertyRef Name="IDTelaio" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -679,7 +701,7 @@ warning 6002: The table/view 'Autokey.dbo.RPC_Cantieri_vw' does not have a prima
           <EntitySetMapping Name="RPC_Lotti">
             <EntityTypeMapping TypeName="AutokeyModel.RPC_Lotti">
               <MappingFragment StoreEntitySet="RPC_Lotti">
-                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Descrizione" ColumnName="Descrizione" />
                 <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
@@ -704,6 +726,16 @@ warning 6002: The table/view 'Autokey.dbo.RPC_Cantieri_vw' does not have a prima
               <MappingFragment StoreEntitySet="PKT_Operatori">
                 <ScalarProperty Name="IDRuolo" ColumnName="IDRuolo" />
                 <ScalarProperty Name="IDTecnici" ColumnName="IDTecnici" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RPC_FotoXTelaio">
+            <EntityTypeMapping TypeName="AutokeyModel.RPC_FotoXTelaio">
+              <MappingFragment StoreEntitySet="RPC_FotoXTelaio">
+                <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
+                <ScalarProperty Name="NomeFile" ColumnName="NomeFile" />
+                <ScalarProperty Name="IDTelaio" ColumnName="IDTelaio" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

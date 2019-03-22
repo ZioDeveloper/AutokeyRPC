@@ -49,3 +49,10 @@ textarea {
     height: 32px;
     text-indent: -9999px; /*hides the link text*/
 }
+.uplImg{
+    display: block;
+    background: url( paperclip.png ) no-repeat;
+    width: 32px;
+    height: 32px;
+    text-indent: -9999px; /*hides the link text*/
+}

@@ -4,158 +4,141 @@
     ViewBag.Title = "Elenco telai";
 }
 
-<h3>Situazione telai</h3>
+<h3><u>Situazione telai</u></h3>
+
+@Html.ActionLink("Inserisci telaio", "Create", "Home")
+&nbsp;&nbsp;&nbsp;&nbsp;
+@Html.ActionLink("Lista x stampa...", "PrintList", "Home")
+&nbsp;&nbsp;&nbsp;&nbsp;
+@Html.ActionLink("Importa telai", "Index", "Telai")
+<br />
+
 @using (Html.BeginForm("DoRefresh", "Home", FormMethod.Get))
 {
+    <div class="form-group form-group-sm">
 
+        @{var myScelta = @Session["Scelta1"].ToString();}
 
+        @*@myScelta*@
+        @{var a = "TUTTE  :";}
+        @{var b = "APERTE :";}
+        @{var c = "CHIUSE :";}
 
-<div class="form-group form-group-sm">
+        @if (myScelta == "TUTTE")
+        {
+            <table border="0">
+                <tr>
+                    <td>@a</td>
+                    <td></td>
+                    <td>@Html.RadioButton("Scelta1", "TUTTE", new { @checked = true, @onclick = "this.form.submit();" })</td>
+                </tr>
+                <tr>
+                    <td>@b</td>
+                    <td></td>
+                    <td>@Html.RadioButton("Scelta1", "APERTE", new { @onclick = "this.form.submit();" })</td>
+                </tr>
+                <tr>
+                    <td>@c</td>
+                    <td></td>
+                    <td>@Html.RadioButton("Scelta1", "CHIUSE", new { @onclick = "this.form.submit();" })</td>
+                </tr>
+            </table>
+        }
+        else if (myScelta == "CHIUSE")
+        {
+            <table border="0">
+                <tr>
+                    <td>@a</td>
+                    <td></td>
+                    <td>@Html.RadioButton("Scelta1", "TUTTE", new { @onclick = "this.form.submit();" })</td>
+                </tr>
+                <tr>
+                    <td>@b</td>
+                    <td></td>
+                    <td>@Html.RadioButton("Scelta1", "APERTE", new { @onclick = "this.form.submit();" })</td>
+                </tr>
+                <tr>
+                    <td>@c</td>
+                    <td></td>
+                    <td>@Html.RadioButton("Scelta1", "CHIUSE", new { @checked = true, @onclick = "this.form.submit();" })</td>
+                </tr>
+            </table>
+        }
 
+        else if (myScelta == "APERTE")
+        {
+            <table border="0">
+                <tr>
+                    <td>@a</td>
+                    <td></td>
+                    <td>@Html.RadioButton("Scelta1", "TUTTE", new { @onclick = "this.form.submit();" })</td>
+                </tr>
+                <tr>
+                    <td>@b</td>
+                    <td></td>
+                    <td>@Html.RadioButton("Scelta1", "APERTE", new { @checked = true, @onclick = "this.form.submit();" })</td>
+                </tr>
+                <tr>
+                    <td>@c</td>
+                    <td></td>
+                    <td>@Html.RadioButton("Scelta1", "CHIUSE", new { @onclick = "this.form.submit();" })</td>
+                </tr>
+            </table>
+        }
+        else
+        {
+            <table border="0">
+                <tr>
+                    <td>@a</td>
+                    <td></td>
+                    <td>@Html.RadioButton("Scelta1", "TUTTE", new { @checked = true, @onclick = "this.form.submit();" }) </td>
+                </tr>
+                <tr>
+                    <td>@b</td>
+                    <td></td>
+                    <td>@Html.RadioButton("Scelta1", "APERTE", new { @onclick = "this.form.submit();" })</td>
+                </tr>
+                <tr>
+                    <td>@c</td>
+                    <td></td>
+                    <td>@Html.RadioButton("Scelta1", "CHIUSE", new { @onclick = "this.form.submit();" })</td>
+                </tr>
+            </table>
+        }
 
-    @{var myScelta = @Session["Scelta1"].ToString();}
+        Telaio : @Html.TextBox("SearchTelaio", null, new { style = "width:80px", @onchange = "this.form.submit();" })
 
-    @*@myScelta*@
-    @{var a = "TUTTE  :";}
-    @{var b = "APERTE :";}
-    @{var c = "CHIUSE :";}
+        <input type="submit" value="Refresh" class="btn btn-default" />
 
-    @if (myScelta == "TUTTE")
-    {
-        <table border="0">
-            <tr>
-                <td>@a</td>
-                <td></td>
-                <td>@Html.RadioButton("Scelta1", "TUTTE", new { @checked = true, @onclick = "this.form.submit();" })</td>
-            </tr>
-            <tr>
-                <td>@b</td>
-                <td></td>
-                <td>@Html.RadioButton("Scelta1", "APERTE", new { @onclick = "this.form.submit();" })</td>
-            </tr>
-            <tr>
-                <td>@c</td>
-                <td></td>
-                <td>@Html.RadioButton("Scelta1", "CHIUSE", new { @onclick = "this.form.submit();" })</td>
-            </tr>
-
-
-        </table>
-
-
-    }
-    else if (myScelta == "CHIUSE")
-    {
-        <table border="0">
-            <tr>
-                <td>@a</td>
-                <td></td>
-                <td>@Html.RadioButton("Scelta1", "TUTTE", new { @onclick = "this.form.submit();" })</td>
-            </tr>
-            <tr>
-                <td>@b</td>
-                <td></td>
-                <td>@Html.RadioButton("Scelta1", "APERTE", new { @onclick = "this.form.submit();" })</td>
-            </tr>
-            <tr>
-                <td>@c</td>
-                <td></td>
-                <td>@Html.RadioButton("Scelta1", "CHIUSE", new { @checked = true, @onclick = "this.form.submit();" })</td>
-            </tr>
-        </table>
-    }
-
-    else if (myScelta == "APERTE")
-    {
-        <table border="0">
-            <tr>
-                <td>@a</td>
-                <td></td>
-                <td>@Html.RadioButton("Scelta1", "TUTTE", new { @onclick = "this.form.submit();" })</td>
-            </tr>
-            <tr>
-                <td>@b</td>
-                <td></td>
-                <td>@Html.RadioButton("Scelta1", "APERTE", new { @checked = true, @onclick = "this.form.submit();" })</td>
-            </tr>
-            <tr>
-                <td>@c</td>
-                <td></td>
-                <td>@Html.RadioButton("Scelta1", "CHIUSE", new { @onclick = "this.form.submit();" })</td>
-            </tr>
-        </table>
-
-
-
-    }
-    else
-    {
-        <table border="0">
-            <tr>
-                <td>@a</td>
-                <td></td>
-                <td>@Html.RadioButton("Scelta1", "TUTTE", new { @checked = true, @onclick = "this.form.submit();" }) </td>
-            </tr>
-            <tr>
-                <td>@b</td>
-                <td></td>
-                <td>@Html.RadioButton("Scelta1", "APERTE", new { @onclick = "this.form.submit();" })</td>
-            </tr>
-            <tr>
-                <td>@c</td>
-                <td></td>
-                <td>@Html.RadioButton("Scelta1", "CHIUSE" , new { @onclick="this.form.submit();" })</td>
-            </tr>
-        </table>
-
-    }
-
-
-
-    Telaio : @Html.TextBox("SearchTelaio", null, new { style = "width:80px" })
-
-    @*Tutti & nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  : @Html.RadioButton("Scelta1", "TUTTE", new { @onclick = "this.form.submit();" })
-        Solo chiusi &nbsp;  :
-        Solo aperti &nbsp;  :
-    *@
-
-    @*<div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <br /><br />*@
-    <input type="submit" value="Refresh" class="btn btn-default" />
-    @*</div>
-        </div>*@
-
-</div>
+    </div>
 
 
 }
 
 
-<table class="table" >
+<table class="table">
 
     <tr>
-        <td>Finito</td>
+        @*<td>Finito</td>*@
         <td>Telaio</td>
         <td>Data</td>
         <td>Dettagli</td>
-        <td>Cancella</td>
+        <td>Foto</td>
+        <td>Files</td>
 
     </tr>
     @foreach (var item in Model.RPC_Telai)
     {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsFinished)
-            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.IsFinished)
+                </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Telaio)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.InsertDate)
             </td>
-
-
             <td>
                 @*@Html.ActionLink("Create New", "Insert")*@
                 @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "searchImg" })
@@ -163,27 +146,30 @@
                 @*@Html.ActionLink("Edit", "Edit", new { id = item.ID })
                     @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
             </td>
-            <td>
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "deleteImg" })
-            </td>
             @*<td>
-                    @Html.ActionLink("Foto", "Image", new { id = item.ID }, new { @class = "photoImg" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "deleteImg" })
                 </td>*@
+            <td>
+                @Html.ActionLink("Foto", "Image", new { id = item.ID }, new { @class = "photoImg" })
+            </td>
+            <td>
+                @Html.ActionLink("Foto", "Images", new { id = item.ID }, new { @class = "uplImg" })
+            </td>
         </tr>
     }
 
 </table>
 <p>
     @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |*@
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Torna alla pagina di Login", "Index")
 </p>
 
 @section scripts {
-<script>
+    <script>
 
-    //document.getElementById('Scelta1').click();
-    //alert('Pippo');
+                                            //document.getElementById('Scelta1').click();
+                                            //alert('Pippo');
 
-</script>
+    </script>
 }
 

@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="AutokeyModel.AUK_cantieri" Width="1.5" PointX="2.875" PointY="0.75" />
         <AssociationConnector Association="AutokeyModel.FK_AUK_cantieri_AUK_cantieri" />
         <AssociationConnector Association="AutokeyModel.FK_RPC_Cantieri_AUK_cantieri" />
-        <EntityTypeShape EntityType="AutokeyModel.RPC_Cantieri_vw" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="AutokeyModel.RPC_Cantieri_vw" Width="2.625" PointX="5.375" PointY="0.75" />
         <EntityTypeShape EntityType="AutokeyModel.AUK_tecnici" Width="1.5" PointX="0.75" PointY="3.875" />
         <AssociationConnector Association="AutokeyModel.FK_AUK_cantieri_AUK_tecnici" />
         <EntityTypeShape EntityType="AutokeyModel.RPC_Lotti" Width="1.5" PointX="9.75" PointY="3.125" />
@@ -20,6 +20,8 @@
         <EntityTypeShape EntityType="AutokeyModel.PKT_Operatori" Width="1.5" PointX="8.5" PointY="7.5" />
         <AssociationConnector Association="AutokeyModel.FK_PKT_Operatori_AUK_tecnici" />
         <AssociationConnector Association="AutokeyModel.FK_RPC_Telai_RPC_Telai11" />
+        <EntityTypeShape EntityType="AutokeyModel.RPC_FotoXTelaio" Width="1.5" PointX="12.375" PointY="0.5" />
+        <AssociationConnector Association="AutokeyModel.FK_RPC_FotoXTelaio_RPC_Telai" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

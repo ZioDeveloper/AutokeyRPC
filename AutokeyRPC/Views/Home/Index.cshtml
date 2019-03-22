@@ -4,26 +4,62 @@
     ViewBag.Title = "Index";
 }
 
-<h2>&nbsp;</h2>
+@*<h2>&nbsp;</h2>*@
 @using (Html.BeginForm())
 {
 
-    <p></p>
-    <p></p>
     <div class="form-horizontal">
 
-        <div class="form-group form-group-sm">
+        <div class="form-group form-group-sm" style="margin-left:10px">
 
             <h2>Login utente</h2>
 
+            <table border="0" style="border-collapse: separate; border-spacing: 5px;">
 
-            Codice perito : @Html.TextBox("SearchString", null, new { style = "width:80px" })
-                            @Html.ValidationMessage("SearchString")
+                <tr><td>&nbsp; </td> </tr>
+                <tr>
+                    <td>Location :</td>
+                </tr>
+                <tr>
+                    <td>    @Html.DropDownList("SearchLocation", (IEnumerable<SelectListItem>)ViewData["RPC_Cantieri_vw"])</td>
+                </tr>
+                <tr><td>&nbsp; </td> </tr>
+                <tr>
+                    <td>Lotto di lavorazione :</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DropDownList("SearchLotto", (IEnumerable<SelectListItem>)ViewData["RPC_Lotti"])
+                    </td>
+                </tr>
+                <tr><td>&nbsp; </td> </tr>
+                <tr>
+                    <td>
+                        Codice perito : @Html.TextBox("SearchString", null, new { style = "width:80px" })
+                        @Html.ValidationMessage("SearchString")
+                        <input type="submit" value="Login" />
+                    </td>
+                    <td>
+                        @*@Html.ValidationMessage("SearchString")
+                        <input type="submit" value="Login" />*@
+                    </td>
+                </tr>
+
+
+
+            </table>
+
+            @*Codice perito : @Html.TextBox("SearchString", null, new { style = "width:80px" })
+            @Html.ValidationMessage("SearchString")
             <input type="submit" value="Login" />
 
             <br><br>
 
-            Location :  @Html.DropDownList("SearchLocation", (IEnumerable <SelectListItem>)ViewData["RPC_Cantieri_vw"])
+            Location :  @Html.DropDownList("SearchLocation", (IEnumerable<SelectListItem>)ViewData["RPC_Cantieri_vw"])
+
+            <br><br>
+
+            Lotto :  @Html.DropDownList("SearchLotto", (IEnumerable<SelectListItem>)ViewData["RPC_Lotti"])*@
 
 
         </div>

@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -21,12 +22,26 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                
+                    
+
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @*<li>@Html.ActionLink("AutOK - Riparazione presso carrozzerie", "Index", "Home")</li>*@
                     @*<li>@Html.ActionLink("About", "About", "Home")</li>*@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink(@Html.Encode(User.Identity.Name) + "panel", "RitornaPannelloUtente", "Home")</li>
+                        <li>@Html.ActionLink("Disconnetti", "Logout", "Home")</li>
+                    }
+                    else
+                    {
+                        @*<li>@Html.ActionLink("Accedi", "Login", "Utente")</li>*@
+                    }
+
+
                 </ul>
             </div>
         </div>

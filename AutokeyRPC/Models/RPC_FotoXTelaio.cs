@@ -12,19 +12,13 @@ namespace AutokeyRPC.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class RPC_Lotti
+    public partial class RPC_FotoXTelaio
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public RPC_Lotti()
-        {
-            this.RPC_Telai = new HashSet<RPC_Telai>();
-        }
-    
         public int ID { get; set; }
+        public int IDTelaio { get; set; }
+        public string NomeFile { get; set; }
         public System.DateTime InsertDate { get; set; }
-        public string Descrizione { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RPC_Telai> RPC_Telai { get; set; }
+        public virtual RPC_Telai RPC_Telai { get; set; }
     }
 }

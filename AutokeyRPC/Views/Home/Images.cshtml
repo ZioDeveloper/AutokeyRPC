@@ -1,0 +1,23 @@
+﻿@model IEnumerable<AutokeyRPC.Models.RPC_FotoXTelaio>
+
+@{
+    ViewBag.Title = "Images";
+}
+
+<h2>Images</h2>
+
+@Html.ActionLink("Torna lalla lista", "DoRefresh")
+<br />
+<br />
+
+@foreach (var item in Model)
+{
+
+    @*@Html.DisplayFor(modelItem => item.NomeFile)*@
+    @*<img ="@Url.Content("~/UploadedFiles/" + item.NomeFile)">Load Image</>*@
+    <img src="@Url.Content("~/UploadedFiles/" + item.NomeFile)" title="@Url.Content(item.NomeFile)" style='height: 100%; width: 100%; object-fit: contain'>
+    <br />
+    <br />
+}
+
+

@@ -1,9 +1,97 @@
-﻿
+﻿@model AutokeyRPC.Models.RPC_Telai
+
 @{
     ViewBag.Title = "Delete";
 }
-<br />
-<br />
-<h2>Not yet implemented !</h2>
 
-<li>@Html.ActionLink("Lista", "DoRefresh", "Home")</li>
+<h2>Delete</h2>
+
+<h3>Vuoi davvero cancellare questo telaio ?</h3>
+<div>
+    @*<h4>RPC_Telai</h4>*@
+    <hr />
+    <dl class="dl-horizontal">
+        @*<dt>
+            @Html.DisplayNameFor(model => model.IsFinished)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsFinished)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InsertDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InsertDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telaio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telaio)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Descr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AUK_cantieri.Codice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AUK_cantieri.Codice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RPC_Lotti.Descrizione)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RPC_Lotti.Descrizione)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RPC_Telai1.IDOperatore)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RPC_Telai1.IDOperatore)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RPC_Telai2.IDOperatore)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RPC_Telai2.IDOperatore)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PKT_Operatori.ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PKT_Operatori.ID)
+        </dd>*@
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Torna lalla lista", "Index")
+        </div>
+    }
+</div>

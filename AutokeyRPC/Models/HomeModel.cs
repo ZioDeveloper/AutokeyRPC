@@ -15,6 +15,8 @@ namespace AutokeyRPC.Models
 
         public IEnumerable<RPC_Telai> RPC_Telai { get; set; }
 
-       
+        public IEnumerable<RPC_FotoXTelaio> RPC_FotoXTelaio { get; set; }
+
+
     }
 }

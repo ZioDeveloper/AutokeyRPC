@@ -1,7 +1,17 @@
-﻿
+﻿@model AutokeyRPC.Models.RPC_Telai
+
 @{
     ViewBag.Title = "Image";
 }
 
-<h2>Image</h2>
-@Html.ActionLink("Torma a lista telai...","DoRefresh","Home")
+<br />
+<br />
+@using (Html.BeginForm("Upload", "Home", FormMethod.Post,
+                            new { enctype = "multipart/form-data" }))
+{
+    <label for="file">Upload Image:</label>
+    <input type="file" name="files[0]" id="files_0" />
+
+    <br />
+    <input type="submit" value="Upload" class="submit" />
+}

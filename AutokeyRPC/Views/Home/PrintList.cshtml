@@ -1,0 +1,44 @@
+﻿@model AutokeyRPC.Models.HomeModel
+
+
+@*@{
+    ViewBag.Title = "PrintList";
+}*@
+
+@*<h2>PrintList</h2>*@
+
+<p>
+    @Html.ActionLink("Torna alla lavorazione", "DoRefresh")
+</p>
+<table class="table">
+
+    <tr>
+        <td>Finito</td>
+        <td>Telaio</td>
+        <td>Data</td>
+
+
+    </tr>
+    @foreach (var item in Model.RPC_Telai)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsFinished)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telaio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InsertDate)
+            </td>
+
+
+
+        </tr>
+    }
+
+</table>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |*@
+
+</p>
