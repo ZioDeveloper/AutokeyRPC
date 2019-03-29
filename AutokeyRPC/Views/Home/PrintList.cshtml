@@ -2,13 +2,15 @@
 
 
 @*@{
-    ViewBag.Title = "PrintList";
-}*@
+        ViewBag.Title = "PrintList";
+    }*@
 
 @*<h2>PrintList</h2>*@
 
 <p>
     @Html.ActionLink("Torna alla lavorazione", "DoRefresh")
+    <br />
+    <input type="button" value="Stampami" onclick="stampa()" />
 </p>
 <table class="table">
 
@@ -16,9 +18,8 @@
         <td>Finito</td>
         <td>Telaio</td>
         <td>Data</td>
-
-
     </tr>
+
     @foreach (var item in Model.RPC_Telai)
     {
         <tr>
@@ -31,9 +32,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.InsertDate)
             </td>
-
-
-
         </tr>
     }
 
@@ -42,3 +40,11 @@
     @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |*@
 
 </p>
+<script type="text/javascript">
+
+    //function stampa() {
+
+   window.print()
+    //}
+
+</script>

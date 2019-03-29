@@ -503,6 +503,7 @@ namespace AutokeyRPC.Controllers
                 pic = System.IO.Path.GetFileName(file.FileName);
                 //pic = "Test.jpg";
                 path = System.IO.Path.Combine(Server.MapPath("~/UploadedFiles"), pic);
+                //path = System.IO.Path.Combine(Server.MapPath(@"E:\AutOK"), pic);
                 if (file != null)
                 {
                     file.SaveAs(path);
