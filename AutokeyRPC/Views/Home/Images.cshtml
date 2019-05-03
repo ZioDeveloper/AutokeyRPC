@@ -6,18 +6,27 @@
 
 <h2>Images</h2>
 
-@Html.ActionLink("Torna lalla lista", "DoRefresh")
+@Html.ActionLink("Torna alla lista", "DoRefresh")
 <br />
 <br />
 
 @foreach (var item in Model)
 {
 
-    @*@Html.DisplayFor(modelItem => item.NomeFile)*@
-    @*<img ="@Url.Content("~/UploadedFiles/" + item.NomeFile)">Load Image</>*@
-    <img src="@Url.Content("~/UploadedFiles/" + item.NomeFile)" title="@Url.Content(item.NomeFile)" style='height: 100%; width: 100%; object-fit: contain'>
-    <br />
-    <br />
+    <table>
+        <tr>
+            <td>
+                @*<img src="@Url.Content("~/UploadedFiles/" + item.NomeFile)" title="@Url.Content(item.NomeFile)" style='height: 100%; width: 100%; object-fit: contain'>*@
+                @*<img src="@Url.Content("~/UploadedFiles/" + item.NomeFile)" title="@Url.Content(item.NomeFile)" alt="Image" style='height: 50%; width: 50%; object-fit: contain' />*@
+                <img src="@Url.Content("~/UploadedFiles/" + item.NomeFile)" title="@Url.Content(item.NomeFile)" alt="Image" style='height: 400px; width: 400px; object-fit: contain' />
+                <p>-</p>
+            </td>
+            <td>
+                @Html.ActionLink("Delete Foto", "DeleteSingleFoto", new { id = item.ID, idTelaio = item.IDTelaio,picName = item.NomeFile }, new { @class = "deleteImg" })
+            </td>
+        </tr>
+    </table>
+
 }
 
 

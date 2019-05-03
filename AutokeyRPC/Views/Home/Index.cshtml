@@ -35,9 +35,9 @@
                 <tr><td>&nbsp; </td> </tr>
                 <tr>
                     <td>
-                        Codice perito : @Html.TextBox("SearchString", null, new { style = "width:80px" })
+                        Codice perito : @Html.TextBox("SearchString", null, new { style = "width:80px" , @Value = "C001" })
                         @Html.ValidationMessage("SearchString")
-                        <input type="submit" value="Login" />
+                        <input type="submit" value="Entra" />
                     </td>
                     <td>
                         @*@Html.ValidationMessage("SearchString")

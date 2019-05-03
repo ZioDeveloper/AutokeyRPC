@@ -18,7 +18,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44309</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -298,6 +298,7 @@
     <Content Include="Views\Home\Images.cshtml" />
     <Content Include="Views\Home\Image.cshtml" />
     <Content Include="Views\Telai\Index.cshtml" />
+    <Content Include="Views\Home\DeleteSingleFoto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

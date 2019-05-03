@@ -17,184 +17,191 @@ namespace AutokeyRPC.Controllers
     {
         private AutokeyEntities db = new AutokeyEntities();
 
+        private bool local = false;
 
-        //public ActionResult Index(string SearchString, string SearchLocation, string SearchLotto, string usr)
-        //{
-        //    bool isAuth = false;
-
-        //    if (usr != String.Empty)
-        //    {
-        //        string UserName = "";
-
-        //        string cookieName = FormsAuthentication.FormsCookieName; //Find cookie name
-        //        HttpCookie cookie = HttpContext.Request.Cookies[cookieName]; //Get the cookie by it's name
-        //        FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(cookie.Value); //Decrypt it
-        //        UserName = ticket.Name; //You have the UserName!
-
-
-        //        if (usr == UserName)
-        //        {
-        //            ViewBag.Messaggio = "BENE il cookie corrisponde!";
-        //            //ViewBag.Messaggio = personaggio;
-        //            isAuth = true;
-        //        }
-        //        else
-        //        {
-        //            ViewBag.Messaggio = "il cookie contenente lo 'username' non corrisponde allo User della queryString!";
-        //            isAuth = false;
-        //            return View("IncorrectLogin");
-        //        }
-
-        //    }
-
-
-
-        //    if (isAuth)
-        //    {
-
-        //        // Carico DropDownList
-        //        using (AutokeyEntities val = new AutokeyEntities())
-        //        {
-        //            Session["Scelta1"] = "";
-        //            var fromDatabaseEF = new SelectList(val.RPC_Cantieri_vw.ToList(), "IDCantiere", "ragioneSociale");
-        //            ViewData["RPC_Cantieri_vw"] = fromDatabaseEF;
-
-        //            var fromDatabaseEF1 = new SelectList(val.RPC_Lotti.ToList(), "ID", "Descrizione");
-        //            ViewData["RPC_Lotti"] = fromDatabaseEF1;
-
-        //        }
-
-        //        TempData["mySearch"] = SearchLocation;
-        //        TempData["myIDOperatore"] = SearchString;
-        //        TempData["myLotto"] = SearchLotto;
-
-        //        // Verifico esista il perito...
-        //        using (AutokeyEntities db = new AutokeyEntities())
-        //        {
-        //            if (String.IsNullOrEmpty(SearchString))
-        //            {
-        //                return View();
-        //            }
-        //            else
-        //            {
-        //                if (SearchString.Length == 4)
-        //                {
-        //                    try
-        //                    {
-        //                        var periti = (from s in db.AUK_tecnici
-        //                                      where s.Codice == SearchString
-        //                                      select s.ID).First();
-        //                        if (periti.ToString() != null)
-        //                        {
-        //                            var model = new Models.HomeModel();
-
-        //                            //var telai = from s in db.RPC_Telai
-        //                            //            where s.IDCantiere.ToString() == SearchLocation
-        //                            //            && s.IDOperatore.ToString() == SearchString
-        //                            //            select s;
-        //                            var telai = from s in db.RPC_Telai
-        //                                        where s.IDCantiere.ToString() == SearchLocation && s.IDLotto.ToString() == SearchLotto
-        //                                        select s;
-        //                            model.RPC_Telai = telai.ToList();
-        //                            return View("VinList", model);
-        //                        }
-        //                        else
-        //                        {
-        //                            return View();
-        //                        }
-        //                    }
-        //                    catch
-        //                    {
-        //                        ViewBag.Messaggio = "Codice non riconosciuto.";
-        //                        return View("IncorrectLogin");
-        //                    }
-
-        //                }
-        //                else
-        //                {
-        //                    ViewBag.Messaggio = "Lunghezza codice errata.";
-        //                    return View("IncorrectLogin");
-        //                }
-        //            }
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return Redirect("http://192.168.20.1/Utente/Login");
-        //    }
-        //}
 
         public ActionResult Index(string SearchString, string SearchLocation, string SearchLotto, string usr)
         {
+            if (usr != null)
+                Session["User"] = usr;
+            if (usr == null)
+                usr = Session["User"].ToString();
 
+            bool isAuth = false;
 
-
-            // Carico DropDownList
-            using (AutokeyEntities val = new AutokeyEntities())
+            if (usr != String.Empty)
             {
-                Session["Scelta1"] = "";
-                var fromDatabaseEF = new SelectList(val.RPC_Cantieri_vw.ToList(), "IDCantiere", "ragioneSociale");
-                ViewData["RPC_Cantieri_vw"] = fromDatabaseEF;
+                string UserName = "";
 
-                var fromDatabaseEF1 = new SelectList(val.RPC_Lotti.ToList(), "ID", "Descrizione");
-                ViewData["RPC_Lotti"] = fromDatabaseEF1;
+                string cookieName = FormsAuthentication.FormsCookieName; //Find cookie name
+                HttpCookie cookie = HttpContext.Request.Cookies[cookieName]; //Get the cookie by it's name
+                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(cookie.Value); //Decrypt it
+                UserName = ticket.Name; //You have the UserName!
 
-            }
 
-            TempData["mySearch"] = SearchLocation;
-            TempData["myIDOperatore"] = SearchString;
-            TempData["myLotto"] = SearchLotto;
-
-            // Verifico esista il perito...
-            using (AutokeyEntities db = new AutokeyEntities())
-            {
-                if (String.IsNullOrEmpty(SearchString))
+                if (usr == UserName)
                 {
-                    return View();
+                    ViewBag.Messaggio = "BENE il cookie corrisponde!";
+                    //ViewBag.Messaggio = personaggio;
+                    isAuth = true;
                 }
                 else
                 {
-                    if (SearchString.Length == 4)
+                    ViewBag.Messaggio = "il cookie contenente lo 'username' non corrisponde allo User della queryString!";
+                    isAuth = false;
+                    return View("IncorrectLogin");
+                }
+
+            }
+
+
+
+            if (isAuth)
+            {
+
+                // Carico DropDownList
+                using (AutokeyEntities val = new AutokeyEntities())
+                {
+                    Session["Scelta1"] = "";
+                    var fromDatabaseEF = new SelectList(val.RPC_Cantieri_vw.ToList(), "IDCantiere", "ragioneSociale");
+                    ViewData["RPC_Cantieri_vw"] = fromDatabaseEF;
+
+                    var fromDatabaseEF1 = new SelectList(val.RPC_Lotti.ToList(), "ID", "Descrizione");
+                    ViewData["RPC_Lotti"] = fromDatabaseEF1;
+
+                }
+
+                TempData["mySearch"] = SearchLocation;
+                TempData["myIDOperatore"] = SearchString;
+                TempData["myLotto"] = SearchLotto;
+
+                // Verifico esista il perito...
+                using (AutokeyEntities db = new AutokeyEntities())
+                {
+                    if (String.IsNullOrEmpty(SearchString))
                     {
-                        try
-                        {
-                            var periti = (from s in db.AUK_tecnici
-                                          where s.Codice == SearchString
-                                          select s.ID).First();
-                            if (periti.ToString() != null)
-                            {
-                                var model = new Models.HomeModel();
-
-                                //var telai = from s in db.RPC_Telai
-                                //            where s.IDCantiere.ToString() == SearchLocation
-                                //            && s.IDOperatore.ToString() == SearchString
-                                //            select s;
-                                var telai = from s in db.RPC_Telai
-                                            where s.IDCantiere.ToString() == SearchLocation && s.IDLotto.ToString() == SearchLotto
-                                            select s;
-                                model.RPC_Telai = telai.ToList();
-                                return View("VinList", model);
-                            }
-                            else
-                            {
-                                return View();
-                            }
-                        }
-                        catch
-                        {
-                            ViewBag.Messaggio = "Codice non riconosciuto.";
-                            return View("IncorrectLogin");
-                        }
-
+                        return View();
                     }
                     else
                     {
-                        ViewBag.Messaggio = "Lunghezza codice errata.";
-                        return View("IncorrectLogin");
+                        if (SearchString.Length == 4)
+                        {
+                            try
+                            {
+                                var periti = (from s in db.AUK_tecnici
+                                              where s.Codice == SearchString
+                                              select s.ID).First();
+                                if (periti.ToString() != null)
+                                {
+                                    var model = new Models.HomeModel();
+
+                                    //var telai = from s in db.RPC_Telai
+                                    //            where s.IDCantiere.ToString() == SearchLocation
+                                    //            && s.IDOperatore.ToString() == SearchString
+                                    //            select s;
+                                    var telai = from s in db.RPC_Telai
+                                                where s.IDCantiere.ToString() == SearchLocation && s.IDLotto.ToString() == SearchLotto
+                                                select s;
+                                    model.RPC_Telai = telai.ToList();
+                                    return View("VinList", model);
+                                }
+                                else
+                                {
+                                    return View();
+                                }
+                            }
+                            catch
+                            {
+                                ViewBag.Messaggio = "Codice non riconosciuto.";
+                                return View("IncorrectLogin");
+                            }
+
+                        }
+                        else
+                        {
+                            ViewBag.Messaggio = "Lunghezza codice errata.";
+                            return View("IncorrectLogin");
+                        }
                     }
                 }
             }
+            else
+            {
+                return Redirect("http://192.168.20.1/Utente/Login");
+            }
         }
+
+        //public ActionResult Index(string SearchString, string SearchLocation, string SearchLotto, string usr)
+        //{
+
+
+
+        //    // Carico DropDownList
+        //    using (AutokeyEntities val = new AutokeyEntities())
+        //    {
+        //        Session["Scelta1"] = "";
+        //        var fromDatabaseEF = new SelectList(val.RPC_Cantieri_vw.ToList(), "IDCantiere", "ragioneSociale");
+        //        ViewData["RPC_Cantieri_vw"] = fromDatabaseEF;
+
+        //        var fromDatabaseEF1 = new SelectList(val.RPC_Lotti.ToList(), "ID", "Descrizione");
+        //        ViewData["RPC_Lotti"] = fromDatabaseEF1;
+
+        //    }
+
+        //    TempData["mySearch"] = SearchLocation;
+        //    TempData["myIDOperatore"] = SearchString;
+        //    TempData["myLotto"] = SearchLotto;
+
+        //    // Verifico esista il perito...
+        //    using (AutokeyEntities db = new AutokeyEntities())
+        //    {
+        //        if (String.IsNullOrEmpty(SearchString))
+        //        {
+        //            return View();
+        //        }
+        //        else
+        //        {
+        //            if (SearchString.Length == 4)
+        //            {
+        //                try
+        //                {
+        //                    var periti = (from s in db.AUK_tecnici
+        //                                  where s.Codice == SearchString
+        //                                  select s.ID).First();
+        //                    if (periti.ToString() != null)
+        //                    {
+        //                        var model = new Models.HomeModel();
+
+        //                        //var telai = from s in db.RPC_Telai
+        //                        //            where s.IDCantiere.ToString() == SearchLocation
+        //                        //            && s.IDOperatore.ToString() == SearchString
+        //                        //            select s;
+        //                        var telai = from s in db.RPC_Telai
+        //                                    where s.IDCantiere.ToString() == SearchLocation && s.IDLotto.ToString() == SearchLotto
+        //                                    select s;
+        //                        model.RPC_Telai = telai.ToList();
+        //                        return View("VinList", model);
+        //                    }
+        //                    else
+        //                    {
+        //                        return View();
+        //                    }
+        //                }
+        //                catch
+        //                {
+        //                    ViewBag.Messaggio = "Codice non riconosciuto.";
+        //                    return View("IncorrectLogin");
+        //                }
+
+        //            }
+        //            else
+        //            {
+        //                ViewBag.Messaggio = "Lunghezza codice errata.";
+        //                return View("IncorrectLogin");
+        //            }
+        //        }
+        //    }
+        //}
 
         public ActionResult About()
         {
@@ -272,6 +279,8 @@ namespace AutokeyRPC.Controllers
         {
             var model = new Models.HomeModel();
 
+            bool CercaSuTuttiLotti = true;
+
             if (Scelta1 != null)
                 Session["Scelta1"] = Scelta1;
             else
@@ -286,11 +295,22 @@ namespace AutokeyRPC.Controllers
             if (SearchTelaio != null && SearchTelaio != "")
             {
 
-                var telai = from s in db.RPC_Telai
-                            where s.IDCantiere.ToString() == mySearch && s.IDLotto.ToString() == myLotto
-                            && s.Telaio.Contains(SearchTelaio)
-                            select s;
-                model.RPC_Telai = telai.ToList();
+                if (!CercaSuTuttiLotti)
+                {
+                    var telai = from s in db.RPC_Telai
+                                where s.IDCantiere.ToString() == mySearch && s.IDLotto.ToString() == myLotto
+                                && s.Telaio.Contains(SearchTelaio)
+                                select s;
+                    model.RPC_Telai = telai.ToList();
+                }
+                else
+                {
+                    var telai = from s in db.RPC_Telai
+                                where s.Telaio.Contains(SearchTelaio)
+                                select s;
+                    model.RPC_Telai = telai.ToList();
+                }
+               //model.RPC_Telai = telai.ToList();
 
             }
 
@@ -502,7 +522,7 @@ namespace AutokeyRPC.Controllers
             {
                 pic = System.IO.Path.GetFileName(file.FileName);
                 //pic = "Test.jpg";
-                path = System.IO.Path.Combine(Server.MapPath("~/UploadedFiles"), pic);
+                path = System.IO.Path.Combine(Server.MapPath("~/UploadedFiles"), myIDTelaio.ToString() + "_"+ pic);
                 //path = System.IO.Path.Combine(Server.MapPath(@"E:\AutOK"), pic);
                 if (file != null)
                 {
@@ -512,7 +532,7 @@ namespace AutokeyRPC.Controllers
                 var sql = @"Insert Into RPC_FotoXTelaio (IDTelaio, NomeFile) Values (@IDTelaio, @NomeFile)";
                 int noOfRowInserted = db.Database.ExecuteSqlCommand(sql,
                     new SqlParameter("@IDTelaio", myIDTelaio),
-                    new SqlParameter("@NomeFile", pic));
+                    new SqlParameter("@NomeFile", myIDTelaio.ToString() + "_" + pic));
 
             }
 
@@ -548,7 +568,7 @@ namespace AutokeyRPC.Controllers
         {
             string myParams = "Username=" + User.Identity.Name + "&param=0&from=1";
 
-            return Redirect("http://192.168.20.1/Utente/UtentePanel?" + myParams);
+            return Redirect("https://webservices.interconsult.it/applogin/Utente/UtentePanel?" + myParams);
         }
 
 
@@ -556,10 +576,40 @@ namespace AutokeyRPC.Controllers
         {
             FormsAuthentication.SignOut();
 
-            return Redirect("http://192.168.20.1/Utente/Login");
+            return Redirect("https://webservices.interconsult.it/applogin");
 
         }
 
+
+        public ActionResult DeleteSingleFoto(int id,int idTelaio,string picName )
+        {
+
+            var sql = @"DELETE FROM RPC_FotoXTelaio WHERE ID = @IDFoto";
+            int myRecordCounter = db.Database.ExecuteSqlCommand(sql, new SqlParameter("@IDFoto", id));
+
+            string fullPath = Request.MapPath("~/UploadedFiles/" + picName);
+            if (System.IO.File.Exists(fullPath))
+            {
+                System.IO.File.Delete(fullPath);
+            }
+
+            var model = new Models.HomeModel();
+            int myIDTelaio = 0;
+            if (TempData["myIDTelaio"] != null)
+                myIDTelaio = (int)TempData["myIDTelaio"];
+            else
+                myIDTelaio = idTelaio;
+
+
+            var foto = from s in db.RPC_FotoXTelaio
+                       where s.IDTelaio.ToString() == myIDTelaio.ToString()
+                       select s;
+            model.RPC_FotoXTelaio = foto.ToList();
+
+            TempData["myIDTelaio"] = myIDTelaio;
+
+            return View("Images", foto);
+        }
 
     }
 }

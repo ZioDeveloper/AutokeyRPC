@@ -28,6 +28,7 @@ namespace AutokeyRPC.Models
         public System.DateTime InsertDate { get; set; }
         public string Telaio { get; set; }
         public string Descr { get; set; }
+        public Nullable<bool> IsNew { get; set; }
     
         public virtual AUK_cantieri AUK_cantieri { get; set; }
         public virtual RPC_Lotti RPC_Lotti { get; set; }

@@ -139,6 +139,7 @@
           <Property Name="Descr" Type="nvarchar" MaxLength="50" />
           <Property Name="IsFinished" Type="bit" Nullable="false" />
           <Property Name="InsertDate" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="IsNew" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Autokey.dbo.RPC_Cantieri_vw' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -490,6 +491,7 @@ warning 6002: The table/view 'Autokey.dbo.RPC_Cantieri_vw' does not have a prima
           <Property Name="Telaio" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Descr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="RPC_FotoXTelaio" Relationship="AutokeyModel.FK_RPC_FotoXTelaio_RPC_Telai" FromRole="RPC_Telai" ToRole="RPC_FotoXTelaio" />
+          <Property Name="IsNew" Type="Boolean" />
         </EntityType>
         <Association Name="FK_RPC_Telai_RPC_Cantieri">
           <End Type="AutokeyModel.AUK_cantieri" Role="AUK_cantieri" Multiplicity="1" />
@@ -710,6 +712,7 @@ warning 6002: The table/view 'Autokey.dbo.RPC_Cantieri_vw' does not have a prima
           <EntitySetMapping Name="RPC_Telai">
             <EntityTypeMapping TypeName="AutokeyModel.RPC_Telai">
               <MappingFragment StoreEntitySet="RPC_Telai">
+                <ScalarProperty Name="IsNew" ColumnName="IsNew" />
                 <ScalarProperty Name="Descr" ColumnName="Descr" />
                 <ScalarProperty Name="Telaio" ColumnName="Telaio" />
                 <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
