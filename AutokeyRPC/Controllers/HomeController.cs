@@ -100,7 +100,8 @@ namespace AutokeyRPC.Controllers
                                     //            && s.IDOperatore.ToString() == SearchString
                                     //            select s;
                                     var telai = from s in db.RPC_Telai
-                                                where s.IDCantiere.ToString() == SearchLocation && s.IDLotto.ToString() == SearchLotto
+                                                where s.IDCantiere.ToString() == SearchLocation //&& s.IDLotto.ToString() == SearchLotto
+                                                orderby s.Telaio
                                                 select s;
                                     model.RPC_Telai = telai.ToList();
                                     return View("VinList", model);
@@ -127,7 +128,8 @@ namespace AutokeyRPC.Controllers
             }
             else
             {
-                return Redirect("http://192.168.20.1/Utente/Login");
+                //return Redirect("http://192.168.20.1/Utente/Login");
+                return Redirect("https://webservices.interconsult.it/applogin/");
             }
         }
 
@@ -161,7 +163,7 @@ namespace AutokeyRPC.Controllers
         //        }
         //        else
         //        {
-        //            if (SearchString.Length == 4)
+        //            if (SearchString.Length == 3)
         //            {
         //                try
         //                {
@@ -187,7 +189,7 @@ namespace AutokeyRPC.Controllers
         //                        return View();
         //                    }
         //                }
-        //                catch
+        //                catch (Exception exc)
         //                {
         //                    ViewBag.Messaggio = "Codice non riconosciuto.";
         //                    return View("IncorrectLogin");
