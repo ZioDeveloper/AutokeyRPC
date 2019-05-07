@@ -163,7 +163,7 @@ namespace AutokeyRPC.Controllers
         //        }
         //        else
         //        {
-        //            if (SearchString.Length == 3)
+        //            if (SearchString.Length == 4)
         //            {
         //                try
         //                {
@@ -257,7 +257,7 @@ namespace AutokeyRPC.Controllers
                 string myLotto = TempData["myLotto"] as string;
 
                 var telai = from s in db.RPC_Telai
-                            where s.IDCantiere.ToString() == mySearch && s.IDLotto.ToString() == myLotto
+                            where s.IDCantiere.ToString() == mySearch //&& s.IDLotto.ToString() == myLotto
                             select s;
                
                 model.RPC_Telai = telai.ToList();
@@ -300,7 +300,7 @@ namespace AutokeyRPC.Controllers
                 if (!CercaSuTuttiLotti)
                 {
                     var telai = from s in db.RPC_Telai
-                                where s.IDCantiere.ToString() == mySearch && s.IDLotto.ToString() == myLotto
+                                where s.IDCantiere.ToString() == mySearch //&& s.IDLotto.ToString() == myLotto
                                 && s.Telaio.Contains(SearchTelaio)
                                 select s;
                     model.RPC_Telai = telai.ToList();
@@ -319,30 +319,34 @@ namespace AutokeyRPC.Controllers
             else if (Scelta1 == "TUTTE")
             {
                 var telai = from s in db.RPC_Telai
-                            where s.IDCantiere.ToString() == mySearch && s.IDLotto.ToString() == myLotto
+                            where s.IDCantiere.ToString() == mySearch //&& s.IDLotto.ToString() == myLotto
+                            orderby s.Telaio
                             select s;
                 model.RPC_Telai = telai.ToList();
             }
             else if (Scelta1 == "CHIUSE")
             {
                 var telai = from s in db.RPC_Telai
-                            where s.IDCantiere.ToString() == mySearch && s.IDLotto.ToString() == myLotto
+                            where s.IDCantiere.ToString() == mySearch //&& s.IDLotto.ToString() == myLotto
                             && s.IsFinished == true
+                            orderby s.Telaio
                             select s;
                 model.RPC_Telai = telai.ToList();
             }
             else if (Scelta1 == "APERTE")
             {
                 var telai = from s in db.RPC_Telai
-                            where s.IDCantiere.ToString() == mySearch && s.IDLotto.ToString() == myLotto
+                            where s.IDCantiere.ToString() == mySearch //&& s.IDLotto.ToString() == myLotto
                             && s.IsFinished == false
+                            orderby s.Telaio
                             select s;
                 model.RPC_Telai = telai.ToList();
             }
             else 
             {
                 var telai = from s in db.RPC_Telai
-                            where s.IDCantiere.ToString() == mySearch && s.IDLotto.ToString() == myLotto
+                            where s.IDCantiere.ToString() == mySearch // && s.IDLotto.ToString() == myLotto
+                            orderby s.Telaio
                             select s;
                 model.RPC_Telai = telai.ToList();
             }
@@ -464,30 +468,34 @@ namespace AutokeyRPC.Controllers
             if (Scelta1 == "TUTTE")
             {
                 var telai = from s in db.RPC_Telai
-                            where s.IDCantiere.ToString() == mySearch && s.IDLotto.ToString() == myLotto
+                            where s.IDCantiere.ToString() == mySearch //&& s.IDLotto.ToString() == myLotto
+                            orderby s.Telaio
                             select s;
                 model.RPC_Telai = telai.ToList();
             }
             else if (Scelta1 == "CHIUSE")
             {
                 var telai = from s in db.RPC_Telai
-                            where s.IDCantiere.ToString() == mySearch && s.IDLotto.ToString() == myLotto
+                            where s.IDCantiere.ToString() == mySearch //&& s.IDLotto.ToString() == myLotto
                             && s.IsFinished == true
+                            orderby s.Telaio
                             select s;
                 model.RPC_Telai = telai.ToList();
             }
             else if (Scelta1 == "APERTE")
             {
                 var telai = from s in db.RPC_Telai
-                            where s.IDCantiere.ToString() == mySearch && s.IDLotto.ToString() == myLotto
+                            where s.IDCantiere.ToString() == mySearch //&& s.IDLotto.ToString() == myLotto
                             && s.IsFinished == false
+                            orderby s.Telaio
                             select s;
                 model.RPC_Telai = telai.ToList();
             }
             else
             {
                 var telai = from s in db.RPC_Telai
-                            where s.IDCantiere.ToString() == mySearch && s.IDLotto.ToString() == myLotto
+                            where s.IDCantiere.ToString() == mySearch //&& s.IDLotto.ToString() == myLotto
+                            orderby s.Telaio
                             select s;
                 model.RPC_Telai = telai.ToList();
             }
@@ -499,13 +507,17 @@ namespace AutokeyRPC.Controllers
             return View("PrintList", model);
         }
 
-        public ActionResult Image(int ID)
+        public ActionResult Image(int? ID)
         {
+
+            if (ID == null)
+                ID = (int)TempData["myIDTelaio"];
             ViewBag.Message = "Images";
             ViewBag.IDTelaio = ID;
             RPC_Telai telaio = db.RPC_Telai.Find(ID);
 
             //RPC_FotoXTelaio foto = db.RPC_FotoXTelaio.Find(ID);
+
             TempData["myIDTelaio"] = ID;
 
             return View(telaio);
@@ -543,17 +555,17 @@ namespace AutokeyRPC.Controllers
             TempData["myLotto"] = myLotto;
             TempData["myIDTelaio"] = myIDTelaio;
 
-            return RedirectToAction("DoRefresh", "Home");
+            return RedirectToAction("Image", "Home", myIDTelaio);
         }
 
-        public ActionResult Images(int ID)
+        public ActionResult Images(int? ID)
         {
             var model = new Models.HomeModel();
             int myIDTelaio = 0;
             if (TempData["myIDTelaio"] != null)
                 myIDTelaio = (int)TempData["myIDTelaio"];
             else
-                myIDTelaio = ID;
+                myIDTelaio = (int)ID;
 
 
             var foto = from s in db.RPC_FotoXTelaio
