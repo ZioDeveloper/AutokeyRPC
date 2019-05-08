@@ -10,15 +10,18 @@ using System.Net;
 using System.Web.Security;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace AutokeyRPC.Controllers
 {
+    //[SessionState(System.Web.SessionState.SessionStateBehavior.ReadOnly)]
     public class HomeController : Controller
     {
         private AutokeyEntities db = new AutokeyEntities();
 
         private bool local = false;
-
+        
 
         public ActionResult Index(string SearchString, string SearchLocation, string SearchLotto, string usr)
         {
@@ -522,22 +525,27 @@ namespace AutokeyRPC.Controllers
 
             return View(telaio);
         }
+
+        
         public ActionResult Upload(IEnumerable<HttpPostedFileBase> files,int? ID)
         {
             string pic = "";
             string path = "";
             int myIDTelaio = 0;
 
-            string mySearch = TempData["mySearch"] as string;
+            
+        string mySearch = TempData["mySearch"] as string;
             string myLotto = TempData["myLotto"] as string;
             myIDTelaio = (int)TempData["myIDTelaio"];
 
             foreach (var file in files)
             {
-                pic = System.IO.Path.GetFileName(file.FileName);
+                pic = DateTime.Now.ToString("yyyyMMddHHmmssfff") + System.IO.Path.GetFileName(file.FileName);
                 //pic = "Test.jpg";
                 path = System.IO.Path.Combine(Server.MapPath("~/UploadedFiles"), myIDTelaio.ToString() + "_"+ pic);
                 //path = System.IO.Path.Combine(Server.MapPath(@"E:\AutOK"), pic);
+
+
                 if (file != null)
                 {
                     file.SaveAs(path);
@@ -558,6 +566,26 @@ namespace AutokeyRPC.Controllers
             return RedirectToAction("Image", "Home", myIDTelaio);
         }
 
+        public static void ResizeJpg(string path, int nWidth, int nHeight)
+        {
+            using (var result = new Bitmap(nWidth, nHeight))
+            {
+                using (var input = new Bitmap(path))
+                {
+                    using (Graphics g = Graphics.FromImage((System.Drawing.Image)result))
+                    {
+                        g.DrawImage(input, 0, 0, nWidth, nHeight);
+                    }
+                }
+
+                var ici = ImageCodecInfo.GetImageEncoders().FirstOrDefault(ie => ie.MimeType == "image/jpeg");
+                var eps = new EncoderParameters(1);
+                eps.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, 100L);
+                result.Save(path, ici, eps);
+            }
+        }
+
+        
         public ActionResult Images(int? ID)
         {
             var model = new Models.HomeModel();
