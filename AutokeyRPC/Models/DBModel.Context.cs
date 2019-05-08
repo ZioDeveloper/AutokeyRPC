@@ -33,5 +33,6 @@ namespace AutokeyRPC.Models
         public virtual DbSet<RPC_Telai> RPC_Telai { get; set; }
         public virtual DbSet<PKT_Operatori> PKT_Operatori { get; set; }
         public virtual DbSet<RPC_FotoXTelaio> RPC_FotoXTelaio { get; set; }
+        public virtual DbSet<RPC_telai_vw> RPC_telai_vw { get; set; }
     }
 }

@@ -129,11 +129,13 @@
         <td>Telaio</td>
         <td>Data</td>
         <td>Dettagli</td>
-        <td>Foto</td>
+        <td>Scatta foto</td>
         <td>Files</td>
+        N° pratiche in lista : <b><font color="green"> @Model.RPC_Telai_vw.Count() </font></b>
+
 
     </tr>
-    @foreach (var item in Model.RPC_Telai)
+    @foreach (var item in Model.RPC_Telai_vw)
     {
         <tr>
             @*<td>
@@ -156,10 +158,10 @@
                     @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "deleteImg" })
                 </td>*@
             <td>
-                @Html.ActionLink("Foto", "Image", new { id = item.ID }, new { @class = "photoImg" })
+                @Html.ActionLink("Scatta foto", "Image", new { id = item.ID }, new { @class = "photoImg" })
             </td>
             <td>
-                @Html.ActionLink("Foto", "Images", new { id = item.ID }, new { @class = "uplImg" })
+                @Html.DisplayFor(modelItem => item.NumFoto) - @Html.ActionLink("Foto", "Images", new { id = item.ID })
             </td>
         </tr>
     }

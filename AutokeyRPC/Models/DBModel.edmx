@@ -152,6 +152,27 @@ warning 6002: The table/view 'Autokey.dbo.RPC_Cantieri_vw' does not have a prima
           <Property Name="IDCantiere" Type="int" Nullable="false" />
           <Property Name="ragioneSociale" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Autokey.dbo.RPC_telai_vw' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="RPC_telai_vw">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="IDCantiere" />
+            <PropertyRef Name="IDLotto" />
+            <PropertyRef Name="IsFinished" />
+            <PropertyRef Name="InsertDate" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDCantiere" Type="int" Nullable="false" />
+          <Property Name="IDOperatore" Type="varchar" MaxLength="4" />
+          <Property Name="IDLotto" Type="int" Nullable="false" />
+          <Property Name="Telaio" Type="nvarchar" MaxLength="50" />
+          <Property Name="Descr" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsFinished" Type="bit" Nullable="false" />
+          <Property Name="InsertDate" Type="datetime" Nullable="false" />
+          <Property Name="IsNew" Type="bit" />
+          <Property Name="NumFoto" Type="int" />
+        </EntityType>
         <Association Name="FK_AUK_cantieri_AUK_cantieri">
           <End Role="AUK_cantieri" Type="Self.AUK_cantieri" Multiplicity="1" />
           <End Role="AUK_cantieri1" Type="Self.AUK_cantieri" Multiplicity="0..1" />
@@ -239,6 +260,20 @@ warning 6002: The table/view 'Autokey.dbo.RPC_Cantieri_vw' does not have a prima
     [RPC_Cantieri_vw].[ragioneSociale] AS [ragioneSociale]
     FROM [dbo].[RPC_Cantieri_vw] AS [RPC_Cantieri_vw]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="RPC_telai_vw" EntityType="Self.RPC_telai_vw" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [RPC_telai_vw].[ID] AS [ID], 
+    [RPC_telai_vw].[IDCantiere] AS [IDCantiere], 
+    [RPC_telai_vw].[IDOperatore] AS [IDOperatore], 
+    [RPC_telai_vw].[IDLotto] AS [IDLotto], 
+    [RPC_telai_vw].[Telaio] AS [Telaio], 
+    [RPC_telai_vw].[Descr] AS [Descr], 
+    [RPC_telai_vw].[IsFinished] AS [IsFinished], 
+    [RPC_telai_vw].[InsertDate] AS [InsertDate], 
+    [RPC_telai_vw].[IsNew] AS [IsNew], 
+    [RPC_telai_vw].[NumFoto] AS [NumFoto]
+    FROM [dbo].[RPC_telai_vw] AS [RPC_telai_vw]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_AUK_cantieri_AUK_cantieri" Association="Self.FK_AUK_cantieri_AUK_cantieri">
             <End Role="AUK_cantieri" EntitySet="AUK_cantieri" />
             <End Role="AUK_cantieri1" EntitySet="AUK_cantieri" />
@@ -322,6 +357,7 @@ warning 6002: The table/view 'Autokey.dbo.RPC_Cantieri_vw' does not have a prima
             <End Role="RPC_Telai" EntitySet="RPC_Telai" />
             <End Role="RPC_FotoXTelaio" EntitySet="RPC_FotoXTelaio" />
           </AssociationSet>
+          <EntitySet Name="RPC_telai_vw" EntityType="AutokeyModel.RPC_telai_vw" />
         </EntityContainer>
         <EntityType Name="AUK_cantieri">
           <Key>
@@ -585,6 +621,25 @@ warning 6002: The table/view 'Autokey.dbo.RPC_Cantieri_vw' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="RPC_telai_vw">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="IDCantiere" />
+            <PropertyRef Name="IDLotto" />
+            <PropertyRef Name="IsFinished" />
+            <PropertyRef Name="InsertDate" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDCantiere" Type="Int32" Nullable="false" />
+          <Property Name="IDOperatore" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="IDLotto" Type="Int32" Nullable="false" />
+          <Property Name="Telaio" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Descr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsFinished" Type="Boolean" Nullable="false" />
+          <Property Name="InsertDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsNew" Type="Boolean" />
+          <Property Name="NumFoto" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -739,6 +794,22 @@ warning 6002: The table/view 'Autokey.dbo.RPC_Cantieri_vw' does not have a prima
                 <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
                 <ScalarProperty Name="NomeFile" ColumnName="NomeFile" />
                 <ScalarProperty Name="IDTelaio" ColumnName="IDTelaio" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RPC_telai_vw">
+            <EntityTypeMapping TypeName="AutokeyModel.RPC_telai_vw">
+              <MappingFragment StoreEntitySet="RPC_telai_vw">
+                <ScalarProperty Name="NumFoto" ColumnName="NumFoto" />
+                <ScalarProperty Name="IsNew" ColumnName="IsNew" />
+                <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
+                <ScalarProperty Name="IsFinished" ColumnName="IsFinished" />
+                <ScalarProperty Name="Descr" ColumnName="Descr" />
+                <ScalarProperty Name="Telaio" ColumnName="Telaio" />
+                <ScalarProperty Name="IDLotto" ColumnName="IDLotto" />
+                <ScalarProperty Name="IDOperatore" ColumnName="IDOperatore" />
+                <ScalarProperty Name="IDCantiere" ColumnName="IDCantiere" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
