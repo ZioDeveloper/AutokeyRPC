@@ -16,35 +16,51 @@
 
 
         @Html.AntiForgeryToken()
-    <div class="row" style="text-align:left">
-        <div class="col-md-4">
-            <p>
-                Telaio : <br />
-                @Html.TextBoxFor(model => model.Telaio, new { @readonly = true, @class = "frmText solaLettura" })
-                @Html.ValidationMessageFor(model => model.Telaio, "", new { @class = "text-danger" })
-            </p>
-        </div>
-        <div class="col-md-4">
-            <p>
-                Data inserimento :  <br />
-                @Html.TextBoxFor(model => model.InsertDate, new { @readonly = true, @class = "frmText solaLettura" })
-                @Html.ValidationMessageFor(model => model.IsFinished, "", new { @class = "text-danger" })
-            </p>
-        </div>
-        <div class="col-md-4">
-            <p>
-                Terminato :  <br />
-                @Html.EditorFor(model => model.IsFinished)
-                @Html.ValidationMessageFor(model => model.IsFinished, "", new { @class = "text-danger" })
-            </p>
-        </div>
-        
-        
-        @*@Html.TextBox("DescrServizio", "C001")*@
-
-
-
+<div class="row" style="text-align:left">
+    <div class="col-md-4">
+        <p>
+            Telaio : <br />
+            @Html.TextBoxFor(model => model.Telaio, new { @readonly = true, @class = "frmText solaLettura" })
+            @Html.ValidationMessageFor(model => model.Telaio, "", new { @class = "text-danger" })
+        </p>
     </div>
+    <div class="col-md-4">
+        <p>
+            Data inserimento :  <br />
+            @Html.TextBoxFor(model => model.InsertDate, new { @readonly = true, @class = "frmText solaLettura" })
+            @Html.ValidationMessageFor(model => model.IsFinished, "", new { @class = "text-danger" })
+        </p>
+    </div>
+    <div class="col-md-4">
+        <p>
+            Terminato :  <br />
+            @Html.EditorFor(model => model.IsFinished)
+            @Html.ValidationMessageFor(model => model.IsFinished, "", new { @class = "text-danger" })
+        </p>
+    </div>
+
+    <div class="col-md-4">
+        <p>
+            Note :  <br />
+            @Html.TextAreaFor(model => model.Note)
+            @Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })
+        </p>
+    </div>
+
+    <div class="col-md-4">
+        <p>
+            Data ultimo aggiornamento dati :  <br />
+            @Html.TextBoxFor(model => model.LastUpdateTime, new { @readonly = true, @class = "frmText solaLettura" })
+            @Html.ValidationMessageFor(model => model.LastUpdateTime, "", new { @class = "text-danger" })
+        </p>
+    </div>
+
+
+    @*@Html.TextBox("DescrServizio", "C001")*@
+
+
+
+</div>
         <input class="btn btn-primary btn-lg" type="submit" value="Aggiorna" />
 
         <div class="form-group" style="visibility:hidden;height:0px;">
