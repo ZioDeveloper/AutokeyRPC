@@ -239,6 +239,7 @@ namespace AutokeyRPC.Controllers
         public ActionResult Edit(int ID)
         {
             RPC_Telai telai = db.RPC_Telai.Find(ID);
+            ViewBag.IDTelaio = ID;
 
             return View(telai);
         }
