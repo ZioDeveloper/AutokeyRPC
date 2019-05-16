@@ -48,6 +48,7 @@
             </tr>
         </table>
     }
+    
     else if (myScelta == "CHIUSE")
     {
         <table border="0">
@@ -110,7 +111,7 @@
         </table>
     }
     @*<p></p>
-    Cerca telaio su tutti i lotti : @Html.CheckBox("CercaSuTuttiLotti", true)*@
+        Cerca telaio su tutti i lotti : @Html.CheckBox("CercaSuTuttiLotti", true)*@
     <p></p>
     Telaio : @Html.TextBox("SearchTelaio", null, new { style = "width:80px", @onchange = "this.form.submit();" })
 
@@ -127,7 +128,7 @@
     <tr>
         @*<td>Finito</td>*@
         <td>Telaio</td>
-        @*<td>Data</td>*@
+        <td>Data</td>
         <td>Ultima modifica</td>
         <td>Dettagli</td>
         <td>Scatta foto</td>
@@ -146,9 +147,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.Telaio)
         </td>
-        @*<td>
+        <td>
             @Html.DisplayFor(modelItem => item.InsertDate)
-        </td>*@
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.LastUpdateTime)
         </td>

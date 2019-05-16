@@ -34,6 +34,8 @@ namespace AutokeyRPC.Controllers
             if (usr == null)
                 usr = Session["User"].ToString();
 
+            Session["Scelta1"] = "";
+
             bool isAuth = false;
 
             if (usr != String.Empty)
@@ -112,6 +114,7 @@ namespace AutokeyRPC.Controllers
                                                 select s;
                                     model.RPC_Telai_vw = telai.ToList();
                                     return View("VinList", model);
+                                    //return RedirectToAction("DoRefresh", "Home");
                                 }
                                 else
                                 {
@@ -191,6 +194,7 @@ namespace AutokeyRPC.Controllers
         //                                    select s;
         //                        model.RPC_Telai_vw = telai.ToList();
         //                        return View("VinList", model);
+        //                        //return RedirectToAction("DoRefresh", "Home");
         //                    }
         //                    else
         //                    {
@@ -294,7 +298,7 @@ namespace AutokeyRPC.Controllers
 
             bool CercaSuTuttiLotti = true;
 
-            if (Scelta1 != null)
+            if (!String.IsNullOrEmpty(Scelta1))
                 Session["Scelta1"] = Scelta1;
             else
                 Scelta1 = Session["Scelta1"].ToString();
