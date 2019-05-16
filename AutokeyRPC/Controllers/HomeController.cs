@@ -549,7 +549,7 @@ namespace AutokeyRPC.Controllers
             int myIDTelaio = 0;
 
             
-        string mySearch = TempData["mySearch"] as string;
+            string mySearch = TempData["mySearch"] as string;
             string myLotto = TempData["myLotto"] as string;
             myIDTelaio = (int)TempData["myIDTelaio"];
 

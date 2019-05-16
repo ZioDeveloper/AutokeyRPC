@@ -24,5 +24,7 @@ namespace AutokeyRPC.Models
         public System.DateTime InsertDate { get; set; }
         public Nullable<bool> IsNew { get; set; }
         public Nullable<int> NumFoto { get; set; }
+        public Nullable<System.DateTime> LastUpdateTime { get; set; }
+        public string Note { get; set; }
     }
 }

@@ -18,21 +18,25 @@
         <td>Finito</td>
         <td>Telaio</td>
         <td>Data</td>
+        <td>Ultima modifica</td>
     </tr>
 
     @foreach (var item in Model.RPC_Telai)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsFinished)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telaio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InsertDate)
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsFinished)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telaio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InsertDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastUpdateTime)
+        </td>
+    </tr>
     }
 
 </table>

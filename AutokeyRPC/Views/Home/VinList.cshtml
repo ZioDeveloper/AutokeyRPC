@@ -127,43 +127,48 @@
     <tr>
         @*<td>Finito</td>*@
         <td>Telaio</td>
-        <td>Data</td>
+        @*<td>Data</td>*@
+        <td>Ultima modifica</td>
         <td>Dettagli</td>
         <td>Scatta foto</td>
         <td>Files</td>
-        N° pratiche in lista : <b><font color="green"> @Model.RPC_Telai_vw.Count() </font></b>
+        N° pratiche in lista :
+        <b><font color="green"> @Model.RPC_Telai_vw.Count() </font></b>
 
 
     </tr>
     @foreach (var item in Model.RPC_Telai_vw)
     {
-        <tr>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.IsFinished)
-                </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.Telaio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InsertDate)
-            </td>
-            <td>
-                @*@Html.ActionLink("Create New", "Insert")*@
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "searchImg" })
+    <tr>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.IsFinished)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Telaio)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.InsertDate)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.LastUpdateTime)
+        </td>
+        <td>
+            @*@Html.ActionLink("Create New", "Insert")*@
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "searchImg" })
 
-                @*@Html.ActionLink("Edit", "Edit", new { id = item.ID })
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
-            </td>
-            @*<td>
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "deleteImg" })
-                </td>*@
-            <td>
-                @Html.ActionLink("Scatta foto", "Image", new { id = item.ID }, new { @class = "photoImg" })
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumFoto) - @Html.ActionLink("Foto", "Images", new { id = item.ID })
-            </td>
-        </tr>
+            @*@Html.ActionLink("Edit", "Edit", new { id = item.ID })
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+        </td>
+        @*<td>
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "deleteImg" })
+        </td>*@
+        <td>
+            @Html.ActionLink("Scatta foto", "Image", new { id = item.ID }, new { @class = "photoImg" })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumFoto) - @Html.ActionLink("Foto", "Images", new { id = item.ID })
+        </td>
+    </tr>
     }
 
 </table>
