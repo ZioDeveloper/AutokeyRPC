@@ -128,11 +128,11 @@
     <tr>
         @*<td>Finito</td>*@
         <td>Telaio</td>
-        <td>Data</td>
-        <td>Ultima modifica</td>
         <td>Dettagli</td>
         <td>Scatta foto</td>
-        <td>Files</td>
+        <td>Numero foto</td>
+        <td>Data inserimento</td>
+        <td>Data ultima modifica</td>
         N° pratiche in lista :
         <b><font color="green"> @Model.RPC_Telai_vw.Count() </font></b>
 
@@ -147,12 +147,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.Telaio)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InsertDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastUpdateTime)
-        </td>
+
         <td>
             @*@Html.ActionLink("Create New", "Insert")*@
             @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "searchImg" })
@@ -168,6 +163,12 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.NumFoto) - @Html.ActionLink("Foto", "Images", new { id = item.ID })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InsertDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastUpdateTime)
         </td>
     </tr>
     }

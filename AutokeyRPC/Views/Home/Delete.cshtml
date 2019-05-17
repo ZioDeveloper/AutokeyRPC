@@ -12,12 +12,12 @@
     <hr />
     <dl class="dl-horizontal">
         @*<dt>
-            @Html.DisplayNameFor(model => model.IsFinished)
-        </dt>
+                @Html.DisplayNameFor(model => model.IsFinished)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.IsFinished)
-        </dd>*@
+            <dd>
+                @Html.DisplayFor(model => model.IsFinished)
+            </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.InsertDate)
@@ -36,62 +36,64 @@
         </dd>
 
         @*<dt>
-            @Html.DisplayNameFor(model => model.Descr)
-        </dt>
+                @Html.DisplayNameFor(model => model.Descr)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Descr)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Descr)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AUK_cantieri.Codice)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.AUK_cantieri.Codice)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.AUK_cantieri.Codice)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.AUK_cantieri.Codice)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.RPC_Lotti.Descrizione)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.RPC_Lotti.Descrizione)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.RPC_Lotti.Descrizione)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.RPC_Lotti.Descrizione)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.RPC_Telai1.IDOperatore)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.RPC_Telai1.IDOperatore)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.RPC_Telai1.IDOperatore)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.RPC_Telai1.IDOperatore)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.RPC_Telai2.IDOperatore)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.RPC_Telai2.IDOperatore)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.RPC_Telai2.IDOperatore)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.RPC_Telai2.IDOperatore)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PKT_Operatori.ID)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.PKT_Operatori.ID)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.PKT_Operatori.ID)
-        </dd>*@
+            <dd>
+                @Html.DisplayFor(model => model.PKT_Operatori.ID)
+            </dd>*@
 
     </dl>
 
     @using (Html.BeginForm())
     {
+        @Html.ValidationSummary(true)
+       
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Esci senza cancellare...", "DoRefresh")
-        </div>
-    }
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        @Html.ActionLink("Esci senza cancellare...", "DoRefresh")
+    </div>
+}
 </div>
