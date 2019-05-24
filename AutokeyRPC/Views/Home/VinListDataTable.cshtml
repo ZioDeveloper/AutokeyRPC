@@ -1,12 +1,18 @@
 ﻿@model AutokeyRPC.Models.HomeModel
 
 @{
-    ViewBag.Title = "Elenco telai";
+    ViewBag.Title = "Elenco telai ";
 }
 
+<script src="~/Scripts/jquery-1.12.4.js"></script>
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/jszip.min.js"></script>
+<script src="~/Scripts/dataTables.buttons.min.js"></script>
+<script src="~/Scripts/buttons.html5.min.js"></script>
+<script src="~/Scripts/jquery-ui.min.js"></script>
+<link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
 
-
-<h3><u>Situazione telai</u></h3>
+<h2><u>Situazione telai </u></h2>
 <p>
     @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |*@
     @Html.ActionLink("Torna alla pagina di filtro", "Index")
@@ -125,57 +131,85 @@
 }
 
 
-<table class="table" id="tblGrid">
-
-    <tr>
-        @*<td>Finito</td>*@
-        <td>Telaio</td>
-        <td>Dettagli</td>
-        <td>Scatta foto</td>
-        <td>Numero foto</td>
-        <td>Data inserimento</td>
-        <td>Data ultima modifica</td>
-        N° pratiche in lista :
-        <b><font color="green"> @Model.RPC_Telai_vw.Count() </font></b>
-
-
-    </tr>
-    @foreach (var item in Model.RPC_Telai_vw)
-    {
+<table id="tblGrid" class="display cell-border compact order-column hover">
+    <thead>
         <tr>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.IsFinished)
-                </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.Telaio)
-            </td>
+            @*<td>Finito</td>*@
+            <td>Telaio</td>
+            <td>Dettagli</td>
+            <td>Scatta foto</td>
+            <td>Numero foto</td>
+            <td>Data inserimento</td>
+            <td>Data ultima modifica</td>
+            N° pratiche in lista :
+            <b><font color="green"> @Model.RPC_Telai_vw.Count() </font></b>
+            <br />
+    </thead>
+    <tbody>
+        @foreach (var item in Model.RPC_Telai_vw)
+        {
+            <tr>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.IsFinished)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telaio)
+                </td>
 
-            <td>
-                @*@Html.ActionLink("Create New", "Insert")*@
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "searchImg" })
+                <td>
+                    @*@Html.ActionLink("Create New", "Insert")*@
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "searchImg" })
 
-                @*@Html.ActionLink("Edit", "Edit", new { id = item.ID })
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
-            </td>
-            @*<td>
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "deleteImg" })
-                </td>*@
-            <td>
-                @Html.ActionLink("Scatta foto", "Image", new { id = item.ID }, new { @class = "photoImg" })
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumFoto) - @Html.ActionLink("Foto", "Images", new { id = item.ID })
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InsertDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastUpdateTime)
-            </td>
-        </tr>
-    }
-
+                    @*@Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+                </td>
+                @*<td>
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "deleteImg" })
+                    </td>*@
+                <td>
+                    @Html.ActionLink("Scatta foto", "Image", new { id = item.ID }, new { @class = "photoImg" })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumFoto) - @Html.ActionLink("Foto", "Images", new { id = item.ID })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InsertDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastUpdateTime)
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+
+<script>
+
+    $(document).ready(function () {
+        gridDataTableView("lista telai.xls");
+    });
+
+    //gridDataTableView = function (fname) {
+    //    $('#tblGrid').dataTable({
+    //        "bFilter": false,
+    //        "bLengthChange": false, "bPaginate": true, "bInfo": true,
+    //        dom: 'Bfrtip',
+    //        "order": [[0, 'desc'], [1, 'desc']],
+    //        buttons: [{ extend: 'excelHtml5', text: 'Export data Excel', className: 'link_button', title: fname }]
+    //    });
+        gridDataTableView = function (fname) {
+            $('#tblGrid').dataTable({
+                "bFilter": false,
+                "bLengthChange": false, "bPaginate": true, "bInfo": true,
+                dom: 'Bfrtip',
+                "order": [[0, 'desc'], [1, 'desc']],
+                buttons: []
+            });
+    }
+</script>
+
+
+
 <p>
     @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |*@
     @Html.ActionLink("Torna alla pagina di filtro", "Index")
@@ -183,7 +217,6 @@
 
     @*@Html.ActionLink("Excel", "ExportToExcel")*@
 </p>
-
 
 
 

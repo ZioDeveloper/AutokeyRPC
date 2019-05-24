@@ -1,0 +1,82 @@
+﻿@model AutokeyRPC.Models.HomeModel
+
+
+@*@{
+        ViewBag.Title = "PrintList";
+    }*@
+
+<script src="~/Scripts/jquery-1.12.4.js"></script>
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/jszip.min.js"></script>
+<script src="~/Scripts/dataTables.buttons.min.js"></script>
+<script src="~/Scripts/buttons.html5.min.js"></script>
+<script src="~/Scripts/jquery-ui.min.js"></script>
+<link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
+
+
+@*<h4>PrintListDataTable</h4>*@
+<br />
+<p>
+    @Html.ActionLink("Torna alla lavorazione", "DoRefresh")
+    <br /><br />
+    <input type="button" value="Stampami" onclick="stampa()" />
+</p>
+<br />
+<table id="tblGridList" class="display hover cell-border compact order-column hover">
+    <thead>
+        <tr>
+            <td>Finito</td>
+            <td>Telaio</td>
+            <td>Data</td>
+            <td>Ultima modifica</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.RPC_Telai)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsFinished)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telaio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InsertDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastUpdateTime)
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |*@
+
+</p>
+<script type="text/javascript">
+    function stampa(){
+        window.print();
+    }
+
+    </script>
+<script>
+
+    $(document).ready(function () {
+        gridDataTableView("lista telai.xls");
+    });
+
+    gridDataTableView = function (fname) {
+        $('#tblGridList').dataTable({
+            "bFilter": false,
+            "bLengthChange": false, "bPaginate": true, "bInfo": true,
+            dom: 'Bfrtip',
+            "order": [[0, 'desc'], [1, 'desc']],
+            buttons: [{ extend: 'excelHtml5', text: 'Export data Excel', className: 'link_button', title: fname }]
+        });
+
+    }
+</script>
+

@@ -229,6 +229,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\image.png" />
+    <Content Include="Content\jquery.dataTables.min.css" />
+    <Content Include="Content\mygrid.css" />
     <Content Include="Content\paperclip.png" />
     <Content Include="Content\up_plus.png" />
     <Content Include="favicon.ico" />
@@ -272,15 +274,33 @@
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Pubblica sul Server.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\buttons.html5.min.js" />
+    <Content Include="Scripts\dataTables.buttons.min.js" />
+    <Content Include="Scripts\Grid\buttons.html5.min.js" />
+    <Content Include="Scripts\Grid\dataTables.buttons.min.js" />
+    <Content Include="Scripts\Grid\jquery-1.12.4.js" />
+    <Content Include="Scripts\Grid\jquery-1.12.4.min.js" />
+    <Content Include="Scripts\Grid\jquery-ui.min.js" />
+    <Content Include="Scripts\Grid\jquery.dataTables.min.js" />
+    <Content Include="Scripts\Grid\jquery.tablesorter.js" />
+    <Content Include="Scripts\Grid\jquery.tablesorter.pager.js" />
+    <Content Include="Scripts\Grid\jszip.min.js" />
+    <Content Include="Scripts\jquery-1.12.4.js" />
+    <Content Include="Scripts\jquery-1.12.4.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
+    <Content Include="Scripts\jquery.tablesorter.js" />
+    <Content Include="Scripts\jquery.tablesorter.pager.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jszip.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Template\Template Jumbotron x tabelle.html" />
     <Content Include="Web.config" />
@@ -308,6 +328,8 @@
     <Content Include="Views\Home\Image.cshtml" />
     <Content Include="Views\Telai\Index.cshtml" />
     <Content Include="Views\Home\DeleteSingleFoto.cshtml" />
+    <Content Include="Views\Home\VinListDataTable.cshtml" />
+    <Content Include="Views\Home\PrintListDataTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
