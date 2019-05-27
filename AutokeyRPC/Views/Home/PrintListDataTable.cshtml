@@ -25,7 +25,7 @@
 <table id="tblGridList" class="display hover cell-border compact order-column hover">
     <thead>
         <tr>
-            <td>Finito</td>
+            <td>Stato</td>
             <td>Telaio</td>
             <td>Data</td>
             <td>Ultima modifica</td>
@@ -36,7 +36,15 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IsFinished)
+                    @if(item.IsFinished==true)
+                    {
+                        <span>Finito</span>
+                    }
+                    else
+                    {
+                        <span>Da finire</span>
+                    }
+                    @*@Html.DisplayFor(modelItem => item.IsFinished)*@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Telaio)
@@ -74,7 +82,7 @@
             "bLengthChange": false, "bPaginate": true, "bInfo": true,
             dom: 'Bfrtip',
             "order": [[0, 'desc'], [1, 'desc']],
-            buttons: [{ extend: 'excelHtml5', text: 'Export data Excel', className: 'link_button', title: fname }]
+            buttons: [{ extend: 'excelHtml5', text: 'Esporta dati in Excel', className: 'link_button', title: fname }]
         });
 
     }

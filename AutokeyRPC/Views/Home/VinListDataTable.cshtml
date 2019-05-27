@@ -4,13 +4,13 @@
     ViewBag.Title = "Elenco telai ";
 }
 
-<script src="~/Scripts/jquery-1.12.4.js"></script>
-<script src="~/Scripts/jquery.dataTables.min.js"></script>
-<script src="~/Scripts/jszip.min.js"></script>
-<script src="~/Scripts/dataTables.buttons.min.js"></script>
-<script src="~/Scripts/buttons.html5.min.js"></script>
-<script src="~/Scripts/jquery-ui.min.js"></script>
-<link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
+@*<script src="~/Scripts/jquery-1.12.4.js"></script>
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/jszip.min.js"></script>
+    <script src="~/Scripts/dataTables.buttons.min.js"></script>
+    <script src="~/Scripts/buttons.html5.min.js"></script>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />*@
 
 <h2><u>Situazione telai </u></h2>
 <p>
@@ -25,9 +25,11 @@
 @Html.ActionLink("Importa telai", "Index", "Telai")
 <br />
 
-@using (Html.BeginForm("DoRefresh", "Home", FormMethod.Get))
+@using (Html.BeginForm("DoRefresh", "Home", FormMethod.Get, new { id = "myForm" }))
 {
+    @Html.AntiForgeryToken()
     <div class="form-group form-group-sm">
+        @Html.AntiForgeryToken()
 
         @{var myScelta = @Session["Scelta1"].ToString();}
 
@@ -183,7 +185,17 @@
     </tbody>
 </table>
 
+
+<script src="~/Scripts/jquery-1.12.4.js"></script>
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+<script src="~/Scripts/jszip.min.js"></script>
+<script src="~/Scripts/dataTables.buttons.min.js"></script>
+<script src="~/Scripts/buttons.html5.min.js"></script>
+<script src="~/Scripts/jquery-ui.min.js"></script>
+<link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
+
 <script>
+
 
     $(document).ready(function () {
         gridDataTableView("lista telai.xls");
@@ -197,18 +209,25 @@
     //        "order": [[0, 'desc'], [1, 'desc']],
     //        buttons: [{ extend: 'excelHtml5', text: 'Export data Excel', className: 'link_button', title: fname }]
     //    });
-        gridDataTableView = function (fname) {
-            $('#tblGrid').dataTable({
-                "bFilter": false,
-                "bLengthChange": false, "bPaginate": true, "bInfo": true,
-                dom: 'Bfrtip',
-                "order": [[0, 'desc'], [1, 'desc']],
-                buttons: []
-            });
+    gridDataTableView = function (fname) {
+        $('#tblGrid').dataTable({
+            "bFilter": false,
+            "bLengthChange": false, "bPaginate": true, "bInfo": true,
+            dom: 'Bfrtip',
+            "order": [[0, 'desc'], [1, 'desc']],
+            buttons: []
+        });
     }
 </script>
 
-
+<script>
+    //$(document).ready(function () {
+    //    $("#myForm").submit();
+    //});
+    $('#myForm').submit(function () {
+        $('input[type=submit]', this).attr('disabled', 'disabled');
+    });
+</script>
 
 <p>
     @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |*@

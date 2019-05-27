@@ -21,6 +21,7 @@
 
 @using (Html.BeginForm("DoRefresh", "Home", FormMethod.Get))
 {
+    @Html.AntiForgeryToken()
     <div class="form-group form-group-sm">
 
         @{var myScelta = @Session["Scelta1"].ToString();}
