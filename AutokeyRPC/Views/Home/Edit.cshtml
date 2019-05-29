@@ -4,7 +4,10 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h3>Dati telaio</h3>
+
+@Html.ActionLink("Esci senza salvare...", "DoRefresh")
+<br /><br />
 
 @*<div class="jumbotron" style="font-size:14px">*@
 @using (Html.BeginForm())
@@ -77,4 +80,6 @@
     @Html.ActionLink("Cancella telaio", "Delete", new { id = ViewBag.IDTelaio })
 
 }
+<br /><br />
+@Html.ActionLink("Esci senza salvare...", "DoRefresh")
 @*</div>*@
