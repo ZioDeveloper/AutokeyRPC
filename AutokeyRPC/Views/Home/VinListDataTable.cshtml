@@ -24,111 +24,118 @@
 @Html.ActionLink("Lista x stampa...", "PrintList", "Home")
 &nbsp;&nbsp;&nbsp;&nbsp;
 @Html.ActionLink("Importa telai", "Index", "Telai")
-<br />
+<br /><br />
 
 @using (Html.BeginForm("DoRefresh", "Home", FormMethod.Get, new { id = "myForm" }))
 {
     @Html.AntiForgeryToken()
-    <div class="form-group form-group-sm">
-        @Html.AntiForgeryToken()
+      <div class="form-group form-group-sm">
+          @Html.AntiForgeryToken()
 
-        @{var myScelta = @Session["Scelta1"].ToString();}
+          @{var myScelta = @Session["Scelta1"].ToString();}
 
-        @*@myScelta*@
-        @{var a = "TUTTE  :";}
-        @{var b = "APERTE :";}
-        @{var c = "CHIUSE :";}
+          @*@myScelta*@
+          @{var a = "TUTTE  :";}
+          @{var b = "APERTE :";}
+          @{var c = "CHIUSE :";}
 
-        @if (myScelta == "TUTTE")
-        {
-            <table border="0">
-                <tr>
-                    <td>@a</td>
-                    <td></td>
-                    <td>@Html.RadioButton("Scelta1", "TUTTE", new { @checked = true, @onclick = "this.form.submit();" })</td>
-                </tr>
-                <tr>
-                    <td>@b</td>
-                    <td></td>
-                    <td>@Html.RadioButton("Scelta1", "APERTE", new { @onclick = "this.form.submit();" })</td>
-                </tr>
-                <tr>
-                    <td>@c</td>
-                    <td></td>
-                    <td>@Html.RadioButton("Scelta1", "CHIUSE", new { @onclick = "this.form.submit();" })</td>
-                </tr>
-            </table>
-        }
+          @if (myScelta == "TUTTE")
+          {
+              <table border="0">
+                  <tr>
+                      <td>@a</td>
+                      <td></td>
+                      <td>@Html.RadioButton("Scelta1", "TUTTE", new { @checked = true, @onclick = "this.form.submit();" })</td>
+                  </tr>
+                  <tr>
+                      <td>@b</td>
+                      <td></td>
+                      <td>@Html.RadioButton("Scelta1", "APERTE", new { @onclick = "this.form.submit();" })</td>
+                  </tr>
+                  <tr>
+                      <td>@c</td>
+                      <td></td>
+                      <td>@Html.RadioButton("Scelta1", "CHIUSE", new { @onclick = "this.form.submit();" })</td>
+                  </tr>
+              </table>
+          }
 
-        else if (myScelta == "CHIUSE")
-        {
-            <table border="0">
-                <tr>
-                    <td>@a</td>
-                    <td></td>
-                    <td>@Html.RadioButton("Scelta1", "TUTTE", new { @onclick = "this.form.submit();" })</td>
-                </tr>
-                <tr>
-                    <td>@b</td>
-                    <td></td>
-                    <td>@Html.RadioButton("Scelta1", "APERTE", new { @onclick = "this.form.submit();" })</td>
-                </tr>
-                <tr>
-                    <td>@c</td>
-                    <td></td>
-                    <td>@Html.RadioButton("Scelta1", "CHIUSE", new { @checked = true, @onclick = "this.form.submit();" })</td>
-                </tr>
-            </table>
-        }
+          else if (myScelta == "CHIUSE")
+          {
+              <table border="0">
+                  <tr>
+                      <td>@a</td>
+                      <td></td>
+                      <td>@Html.RadioButton("Scelta1", "TUTTE", new { @onclick = "this.form.submit();" })</td>
+                  </tr>
+                  <tr>
+                      <td>@b</td>
+                      <td></td>
+                      <td>@Html.RadioButton("Scelta1", "APERTE", new { @onclick = "this.form.submit();" })</td>
+                  </tr>
+                  <tr>
+                      <td>@c</td>
+                      <td></td>
+                      <td>@Html.RadioButton("Scelta1", "CHIUSE", new { @checked = true, @onclick = "this.form.submit();" })</td>
+                  </tr>
+              </table>
+          }
 
-        else if (myScelta == "APERTE")
-        {
-            <table border="0">
-                <tr>
-                    <td>@a</td>
-                    <td></td>
-                    <td>@Html.RadioButton("Scelta1", "TUTTE", new { @onclick = "this.form.submit();" })</td>
-                </tr>
-                <tr>
-                    <td>@b</td>
-                    <td></td>
-                    <td>@Html.RadioButton("Scelta1", "APERTE", new { @checked = true, @onclick = "this.form.submit();" })</td>
-                </tr>
-                <tr>
-                    <td>@c</td>
-                    <td></td>
-                    <td>@Html.RadioButton("Scelta1", "CHIUSE", new { @onclick = "this.form.submit();" })</td>
-                </tr>
-            </table>
-        }
-        else
-        {
-            <table border="0">
-                <tr>
-                    <td>@a</td>
-                    <td></td>
-                    <td>@Html.RadioButton("Scelta1", "TUTTE", new { @checked = true, @onclick = "this.form.submit();" }) </td>
-                </tr>
-                <tr>
-                    <td>@b</td>
-                    <td></td>
-                    <td>@Html.RadioButton("Scelta1", "APERTE", new { @onclick = "this.form.submit();" })</td>
-                </tr>
-                <tr>
-                    <td>@c</td>
-                    <td></td>
-                    <td>@Html.RadioButton("Scelta1", "CHIUSE", new { @onclick = "this.form.submit();" })</td>
-                </tr>
-            </table>
-        }
-        @*<p></p>
-            Cerca telaio su tutti i lotti : @Html.CheckBox("CercaSuTuttiLotti", true)*@
-        <p></p>
-        Telaio : @Html.TextBox("SearchTelaio", null, new { style = "width:80px", @onchange = "this.form.submit();" })
+          else if (myScelta == "APERTE")
+          {
+              <table border="0">
+                  <tr>
+                      <td>@a</td>
+                      <td></td>
+                      <td>@Html.RadioButton("Scelta1", "TUTTE", new { @onclick = "this.form.submit();" })</td>
+                  </tr>
+                  <tr>
+                      <td>@b</td>
+                      <td></td>
+                      <td>@Html.RadioButton("Scelta1", "APERTE", new { @checked = true, @onclick = "this.form.submit();" })</td>
+                  </tr>
+                  <tr>
+                      <td>@c</td>
+                      <td></td>
+                      <td>@Html.RadioButton("Scelta1", "CHIUSE", new { @onclick = "this.form.submit();" })</td>
+                  </tr>
+              </table>
+          }
+          else
+          {
+              <table border="0">
+                  <tr>
+                      <td>@a</td>
+                      <td></td>
+                      <td>@Html.RadioButton("Scelta1", "TUTTE", new { @checked = true, @onclick = "this.form.submit();" }) </td>
+                  </tr>
+                  <tr>
+                      <td>@b</td>
+                      <td></td>
+                      <td>@Html.RadioButton("Scelta1", "APERTE", new { @onclick = "this.form.submit();" })</td>
+                  </tr>
+                  <tr>
+                      <td>@c</td>
+                      <td></td>
+                      <td>@Html.RadioButton("Scelta1", "CHIUSE", new { @onclick = "this.form.submit();" })</td>
+                  </tr>
+              </table>
+          }
+          @*<p></p>
+        Cerca telaio su tutti i lotti : @Html.CheckBox("CercaSuTuttiLotti", true)*@
+          <p></p>
+          Telaio : @Html.TextBox("SearchTelaio", null, new { style = "width:80px", @onchange = "this.form.submit();" })
 
-        <input type="submit" value="Refresh" class="btn btn-default" />
+          <input type="submit" value="Refresh" class="btn btn-default" />
+          &nbsp;&nbsp;
+          <details style="display:inline;">
+              <summary content: "+"></summary>
+              <p style="color:black;font-size:11px;"><b>(N.B la ricerca per telaio ignora lo stato aperte /chiuse e cerca comunque quel telaio specifico. <br />
+                                                        Per tornare alla ricerca chiuse/aperte svuotare il campo ricerca per telaio e premere Refresh)</b></p>
+          </details>
+          
 
-    </div>
+      </div>
 
 
 }
@@ -148,7 +155,7 @@
             <td>Chiuso</td>
             N° pratiche in lista :
             <b><font color="green"> @Model.RPC_Telai_vw.Count() </font></b>
-            <br />
+            <br /><br />
 </thead>
     <tbody>
         @foreach (var item in Model.RPC_Telai_vw)
@@ -211,13 +218,45 @@
     //        "order": [[0, 'desc'], [1, 'desc']],
     //        buttons: [{ extend: 'excelHtml5', text: 'Export data Excel', className: 'link_button', title: fname }]
     //    });
+    //gridDataTableView = function (fname) {
+    //    $('#tblGrid').dataTable({
+    //        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+    //        "pageLength": 25, "pagingType": "full_numbers",
+    //        "bFilter": false,
+    //        "bLengthChange": false, "bPaginate": true, "bInfo": true,
+    //        dom: 'Bfrtip',
+    //        "order": [[0, 'desc'], [1, 'desc']],
+    //        buttons: []
+    //    });
     gridDataTableView = function (fname) {
         $('#tblGrid').dataTable({
-            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-            "pageLength": 25, "pagingType": "full_numbers",
+            language: {
+                processing: "Ricerca in corso...",
+                search: "Ricerca:",
+                lengthMenu: "Visualizza _MENU_ elementi",
+                info: "Vista da _START_ a _END_ di _TOTAL_ elementi",
+                infoEmpty: "Vista da 0 a 0 di 0 elementi",
+                infoFiltered: "(filtrati da _MAX_ elementi totali)",
+                infoPostFix: "",
+                loadingRecords: "Caricamento...",
+                zeroRecords: "La ricerca non ha portato alcun risultato.",
+                emptyTable: "Nessun record presentein tabella",
+                paginate: {
+                    first: "Inizio",
+                    previous: "Precedente",
+                    next: "Successivo",
+                    last: "Fine"
+                },
+                aria: {
+                    sortAscending: ": attiva per ordinare la colonna in ordine crescente",
+                    sortDescending: ": attiva per ordinare la colonna in ordine decrescente"
+                }
+            },
+            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tutti    "]],
             "bFilter": false,
-            "bLengthChange": false, "bPaginate": true, "bInfo": true,
-            dom: 'Bfrtip',
+            "bLengthChange": true,
+            "bPaginate": true,
+            "bInfo": true,
             "order": [[0, 'desc'], [1, 'desc']],
             buttons: []
         });
